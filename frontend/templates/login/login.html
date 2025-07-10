@@ -3,9 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | AgriMarket</title>
+    <link rel="stylesheet" href="../../stylesheets/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    
+    <div class="login-container">
+        <!-- Left Side - Branding -->
+        <div class="login-left">
+            <div class="branding">
+                <div class="logo">AgriMarket</div>
+                <h1>Connect with Local Farmers</h1>
+                <p>Access fresh produce directly from rural farmers across South Africa</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-truck"></i>
+                    <span>Direct from farm to you</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Fair pricing for farmers</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-leaf"></i>
+                    <span>Fresh, traceable produce</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Forms -->
+        <div class="login-right">
+            <!-- Login Form -->
+            <div class="form-container active" id="login-form">
+                <h2>Welcome Back</h2>
+                <p class="subtext">Login to access your AgriMarket account</p>
+                
+                <form class="login-form">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <label class="remember-me">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password" id="forgot-password-link">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-google">
+                        <img src="../../assets/images/google-icon.png" alt="Google">
+                        Continue with Google
+                    </button>
+                    
+                    <div class="register-link">
+                        Don't have an account? <a href="register.html">Register</a>
+                    </div>
+                    
+                    <div class="legal-text">
+                        By continuing, you agree to AgriMarket's <a href="#">Terms of Service</a> and acknowledge you've read our <a href="#">Privacy Policy</a>.
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Forgot Password Form -->
+            <div class="form-container" id="forgot-form">
+                <div class="form-header">
+                    <h2>Reset Password</h2>
+                    <p class="subtext">Enter your email to receive a password reset link</p>
+                </div>
+                
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Enter Email</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Verify OTP</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-text">New Password</div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Email -->
+                <form class="forgot-form step-content active" data-step="1">
+                    <div class="input-group">
+                        <label for="reset-email">Email Address</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="reset-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-reset">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="next-step-1">Continue</button>
+                    </div>
+                </form>
+                
+                <!-- Step 2: OTP -->
+                <form class="forgot-form step-content" data-step="2">
+                    <div class="otp-notice">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <p>We've sent a 6-digit code to <span class="user-email">user@example.com</span></p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="otp">Enter OTP</label>
+                        <div class="otp-inputs">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                            <input type="text" maxlength="1" pattern="[0-9]">
+                        </div>
+                        <div class="otp-actions">
+                            <a href="#" class="resend-otp">Resend code</a>
+                            <span class="timer">(1:59)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-2">Back</button>
+                        <button type="button" class="btn btn-primary" id="next-step-2">Verify</button>
+                    </div>
+                </form>
+                
+                <!-- Step 3: New Password -->
+                <form class="forgot-form step-content" data-step="3">
+                    <div class="input-group">
+                        <label for="new-password">New Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="new-password" placeholder="Enter new password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter">
+                                <span class="strength-bar weak"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                            </div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirm-password" placeholder="Confirm new password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-3">Back</button>
+                        <button type="submit" class="btn btn-primary">Reset Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/login.js"></script>
 </body>
 </html>

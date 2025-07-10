@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | AgriMarket</title>
+    <link rel="stylesheet" href="../../stylesheets/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="register-container">
+        <!-- Left Side - Branding -->
+        <div class="register-left">
+            <div class="branding">
+                <div class="logo">AgriMarket</div>
+                <h1>Join Our Marketplace</h1>
+                <p>Connect with local farmers or buyers to create a sustainable food ecosystem</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>10,000+ farmers and buyers connected</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Grow your business with direct access</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure and verified transactions</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Forms -->
+        <div class="register-right">
+            <!-- Role Selection -->
+            <div class="form-container active" id="role-selection">
+                <h2>Create Your Account</h2>
+                <p class="subtext">Select your account type to get started</p>
+                
+                <div class="role-options">
+                    <div class="role-card farmer" data-role="farmer">
+                        <div class="role-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3>Farmer</h3>
+                        <p>Sell your produce directly to buyers</p>
+                        <div class="role-benefits">
+                            <span><i class="fas fa-check"></i> List your products</span>
+                            <span><i class="fas fa-check"></i> Set your prices</span>
+                            <span><i class="fas fa-check"></i> Manage orders</span>
+                        </div>
+                        <button class="btn btn-outline">Select</button>
+                    </div>
+                    
+                    <div class="role-card buyer" data-role="buyer">
+                        <div class="role-icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <h3>Buyer</h3>
+                        <p>Purchase fresh produce directly from farmers</p>
+                        <div class="role-benefits">
+                            <span><i class="fas fa-check"></i> Browse products</span>
+                            <span><i class="fas fa-check"></i> Place orders</span>
+                            <span><i class="fas fa-check"></i> Track deliveries</span>
+                        </div>
+                        <button class="btn btn-outline">Select</button>
+                    </div>
+                </div>
+                
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Login</a>
+                </div>
+            </div>
+            
+            <!-- Farmer Registration -->
+            <div class="form-container" id="farmer-registration">
+                <div class="form-header">
+                    <button class="back-button" id="back-to-role-farmer">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Farmer Registration</h2>
+                    <p class="subtext">Join our network of trusted farmers</p>
+                </div>
+                
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Personal Info</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Farm Details</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Account Setup</div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Personal and Farm Info -->
+                <form class="register-form step-content active" data-step="1">
+                    <h3>Step 1 of 3: Personal and Farm Information</h3>
+                    <p class="step-description">Tell us about yourself and your farm</p>
+                    
+                    <div class="input-group">
+                        <label for="farmer-name">Full Name</label>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="farmer-name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farmer-email">Email Address</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="farmer-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farmer-phone">Phone Number</label>
+                        <div class="input-field">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="farmer-phone" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farmer-province">Province</label>
+                        <div class="input-field">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select id="farmer-province" required>
+                                <option value="" disabled selected>Select your province</option>
+                                <option>Eastern Cape</option>
+                                <option>Free State</option>
+                                <option>Gauteng</option>
+                                <option>KwaZulu-Natal</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>Northern Cape</option>
+                                <option>North West</option>
+                                <option>Western Cape</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farm-name">Farm Name</label>
+                        <div class="input-field">
+                            <i class="fas fa-home"></i>
+                            <input type="text" id="farm-name" placeholder="Enter your farm name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farm-location">Farm Location</label>
+                        <div class="input-field">
+                            <i class="fas fa-map-pin"></i>
+                            <input type="text" id="farm-location" placeholder="Search for your farm location" required>
+                        </div>
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <span>Map will appear here when integrated</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" id="next-farmer-step-1">Continue</button>
+                    </div>
+                </form>
+                
+                <!-- Step 2: Farm Identity & Details -->
+                <form class="register-form step-content" data-step="2">
+                    <h3>Step 2 of 3: Farm Identity & Details</h3>
+                    <p class="step-description">Verify your farm and provide additional details</p>
+                    
+                    <div class="input-group">
+                        <label for="farm-id">ID/Permit Number</label>
+                        <div class="input-field">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="farm-id" placeholder="Enter government registration number" required>
+                        </div>
+                        <p class="input-help">This helps us verify your farm's authenticity</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farm-document">Upload ID Document</label>
+                        <div class="file-upload">
+                            <label for="farm-document" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose file or drag here</span>
+                                <input type="file" id="farm-document" accept=".pdf,.jpg,.png" required>
+                            </label>
+                            <div class="file-upload-info">
+                                <span class="file-name">No file chosen</span>
+                                <span class="file-size">PDF, JPG or PNG (max 5MB)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farm-type">Farm Type</label>
+                        <div class="input-field">
+                            <i class="fas fa-tags"></i>
+                            <select id="farm-type" required>
+                                <option value="" disabled selected>Select farm type</option>
+                                <option>Grains/Cereals</option>
+                                <option>Vegetables</option>
+                                <option>Fruits</option>
+                                <option>Livestock</option>
+                                <option>Dairy</option>
+                                <option>Poultry</option>
+                                <option>Mixed Farming</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farm-years">Years in Operation</label>
+                        <div class="input-field">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="number" id="farm-years" min="0" placeholder="Enter number of years" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-farmer-step-2">Back</button>
+                        <button type="button" class="btn btn-primary" id="next-farmer-step-2">Continue</button>
+                    </div>
+                </form>
+                
+                <!-- Step 3: Account Setup -->
+                <form class="register-form step-content" data-step="3">
+                    <h3>Step 3 of 3: Account Setup</h3>
+                    <p class="step-description">Create your secure account credentials</p>
+                    
+                    <div class="input-group">
+                        <label for="farmer-password">Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="farmer-password" placeholder="Create a password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter">
+                                <span class="strength-bar weak"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                            </div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                        <div class="password-requirements">
+                            <p>Password must contain:</p>
+                            <ul>
+                                <li class="req-length">At least 8 characters</li>
+                                <li class="req-uppercase">One uppercase letter</li>
+                                <li class="req-number">One number</li>
+                                <li class="req-special">One special character</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="farmer-confirm-password">Confirm Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="farmer-confirm-password" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group terms-group">
+                        <label class="checkbox-container">I agree to AgriMarket's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            <input type="checkbox" id="farmer-terms" required>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-farmer-step-3">Back</button>
+                        <button type="submit" class="btn btn-primary">Complete Registration</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Buyer Registration -->
+            <div class="form-container" id="buyer-registration">
+                <div class="form-header">
+                    <button class="back-button" id="back-to-role-buyer">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Buyer Registration</h2>
+                    <p class="subtext">Join as a buyer to access fresh farm produce</p>
+                </div>
+                
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Buyer Info</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Account Setup</div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Buyer Info -->
+                <form class="register-form step-content active" data-step="1">
+                    <h3>Step 1 of 2: Buyer Information</h3>
+                    <p class="step-description">Tell us about yourself and your buying needs</p>
+                    
+                    <div class="input-group">
+                        <label for="buyer-name">Full Name</label>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="buyer-name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyer-email">Email Address</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="buyer-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyer-phone">Phone Number</label>
+                        <div class="input-field">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="buyer-phone" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyer-category">Buyer Category</label>
+                        <div class="input-field">
+                            <i class="fas fa-tag"></i>
+                            <select id="buyer-category" required>
+                                <option value="" disabled selected>Select your category</option>
+                                <option>Restaurant/Cafe</option>
+                                <option>Retail Store</option>
+                                <option>Supermarket</option>
+                                <option>School/University</option>
+                                <option>NGO/Charity</option>
+                                <option>Personal/Family</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyer-province">Province</label>
+                        <div class="input-field">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select id="buyer-province" required>
+                                <option value="" disabled selected>Select your province</option>
+                                <option>Eastern Cape</option>
+                                <option>Free State</option>
+                                <option>Gauteng</option>
+                                <option>KwaZulu-Natal</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>Northern Cape</option>
+                                <option>North West</option>
+                                <option>Western Cape</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" id="next-buyer-step-1">Continue</button>
+                    </div>
+                </form>
+                
+                <!-- Step 2: Account Setup -->
+                <form class="register-form step-content" data-step="2">
+                    <h3>Step 2 of 2: Account Setup</h3>
+                    <p class="step-description">Create your secure account credentials</p>
+                    
+                    <div class="input-group">
+                        <label for="buyer-password">Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="buyer-password" placeholder="Create a password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter">
+                                <span class="strength-bar weak"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                            </div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                        <div class="password-requirements">
+                            <p>Password must contain:</p>
+                            <ul>
+                                <li class="req-length">At least 8 characters</li>
+                                <li class="req-uppercase">One uppercase letter</li>
+                                <li class="req-number">One number</li>
+                                <li class="req-special">One special character</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyer-confirm-password">Confirm Password</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="buyer-confirm-password" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group terms-group">
+                        <label class="checkbox-container">I agree to AgriMarket's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            <input type="checkbox" id="buyer-terms" required>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-buyer-step-2">Back</button>
+                        <button type="submit" class="btn btn-primary">Complete Registration</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/login.js"></script>
+</body>
+</html>

@@ -1,1 +1,260 @@
-<!-- Entry point for the website -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriMarket - Connecting Farmers with Buyers</title>
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AgriMarket</a>
+            </div>
+            <div class="search-bar">
+                <div class="search-category">
+                    <select>
+                        <option>All Categories</option>
+                        <option>Fruits</option>
+                        <option>Vegetables</option>
+                        <option>Grains</option>
+                        <option>Dairy</option>
+                    </select>
+                    <input type="text" placeholder="Search for products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="option">All Categories</a></li>
+                    <li><a href="#" class="option">Browse</a></li>
+                    <li><a href="templates/login/login.html" class="nav-btn login">Login</a></li>
+                    <li><a href="templates/login/register.html" class="nav-btn register">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Sidebar Filters -->
+            <aside class="sidebar">
+                <div class="filter-section">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <h4>Supplier Location</h4>
+                        <select>
+                            <option>All Provinces</option>
+                            <option>Gauteng</option>
+                            <option>Western Cape</option>
+                            <option>KwaZulu-Natal</option>
+                            <option>Eastern Cape</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Product Category</h4>
+                        <ul class="category-list">
+                            <li><a href="#">Fruits</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Grains</a></li>
+                            <li><a href="#">Dairy</a></li>
+                            <li><a href="#">Meat</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Min. Order</h4>
+                        <input type="text" placeholder="e.g. 10kg">
+                    </div>
+                    <div class="filter-group">
+                        <label class="checkbox-container">Verified Sellers Only
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <section class="product-grid">
+                <div class="grid-header">
+                    <h2>Fresh Produce from Local Farmers</h2>
+                    <div class="sort-options">
+                        <select>
+                            <option>Sort by: Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="assets/images/product1.jpg" alt="Fresh Apples">
+                            <span class="stock-badge">In Stock: 150kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Red Apples</h3>
+                            <div class="price">R 65 / 10kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Farm Fresh Co.</div>
+                                <div class="supplier-location">Western Cape</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.jNvLzjm9bZSCJKKjiZL2AQAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Organic Tomatoes">
+                            <span class="stock-badge">In Stock: 80kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Organic Tomatoes</h3>
+                            <div class="price">R 45 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Green Valley Farms</div>
+                                <div class="supplier-location">Gauteng</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://th.bing.com/th/id/R.2a211c11dab40396b01d0129693c27d6?rik=YQM%2fl2ZuC0I3ug&pid=ImgRaw&r=0" alt="Sweet Corn">
+                            <span class="stock-badge">In Stock: 200kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Sweet Corn</h3>
+                            <div class="price">R 30 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Sunshine Farms</div>
+                                <div class="supplier-location">KwaZulu-Natal</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.TpObdWh6guNQhi4Rldc5YwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fresh Potatoes">
+                            <span class="stock-badge">In Stock: 300kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Potatoes</h3>
+                            <div class="price">R 50 / 10kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Mountain View Produce</div>
+                                <div class="supplier-location">Eastern Cape</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 5 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.cc1fmrVHT-YDXEVia6rsUwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Carrots">
+                            <span class="stock-badge">In Stock: 120kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Carrots</h3>
+                            <div class="price">R 40 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Riverbend Farms</div>
+                                <div class="supplier-location">Free State</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 6 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.VtUhSp-QUNbW2daMC1JWYQHaF3?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Avocados">
+                            <span class="stock-badge">In Stock: 75kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Hass Avocados</h3>
+                            <div class="price">R 90 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Tropical Delights</div>
+                                <div class="supplier-location">Limpopo</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About AgriMarket</h3>
+                    <p>Connecting rural farmers directly with urban consumers, restaurants, and retailers to enable fair pricing, reduce waste, and promote transparent food sourcing.</p>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Farmers</a></li>
+                        <li><a href="#">Buyers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Agri Street, Farmville, SA</p>
+                    <p><i class="fas fa-phone"></i> +27 12 345 6789</p>
+                    <p><i class="fas fa-envelope"></i> info@agrimarket.co.za</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AgriMarket. All Rights Reserved. | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
