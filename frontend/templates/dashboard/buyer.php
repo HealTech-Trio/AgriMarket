@@ -22,6 +22,7 @@
     <header class="buyer-header">
         <div class="container">
             <div class="logo">
+                <i class="fas fa-seedling"></i>
                 <a href="buyer.php">AgriMarket</a>
             </div>
             
