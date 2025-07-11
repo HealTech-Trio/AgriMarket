@@ -1,5 +1,10 @@
-// Login and Registration Form Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const loginForm = document.getElementById('login-form');
+    const forgotForm = document.getElementById('forgot-form');
+    const forgotPasswordLink = document.getElementById('forgot-password-link');
+    const cancelResetBtn = document.getElementById('cancel-reset');
+    
     // Toggle Password Visibility
     const togglePasswordButtons = document.querySelectorAll('.toggle-password');
     togglePasswordButtons.forEach(button => {
@@ -10,291 +15,200 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('fa-eye-slash');
         });
     });
-
-    // Forgot Password Flow
-    const forgotPasswordLink = document.getElementById('forgot-password-link');
-    const loginForm = document.getElementById('login-form');
-    const forgotForm = document.getElementById('forgot-form');
-    const cancelReset = document.getElementById('cancel-reset');
     
-    if (forgotPasswordLink && loginForm && forgotForm && cancelReset) {
-        forgotPasswordLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            loginForm.classList.remove('active');
-            forgotForm.classList.add('active');
-            // Set the email from login form to reset form if available
-            const email = document.getElementById('email').value;
-            if (email) {
-                document.getElementById('reset-email').value = email;
-                document.querySelector('.user-email').textContent = email;
-            }
-        });
-        
-        cancelReset.addEventListener('click', function() {
-            forgotForm.classList.remove('active');
-            loginForm.classList.add('active');
-        });
-    }
-
-    // Password Reset Steps
-    const nextStep1 = document.getElementById('next-step-1');
-    const nextStep2 = document.getElementById('next-step-2');
-    const backStep2 = document.getElementById('back-step-2');
-    const backStep3 = document.getElementById('back-step-3');
+    // Forgot Password Link
+    forgotPasswordLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginForm.classList.remove('active');
+        forgotForm.classList.add('active');
+        showStep('forgot', 1);
+    });
     
-    if (nextStep1) {
-        nextStep1.addEventListener('click', function() {
-            goToStep(2);
-            // Update the email display in OTP step
+    // Cancel Reset Button
+    cancelResetBtn.addEventListener('click', function() {
+        forgotForm.classList.remove('active');
+        loginForm.classList.add('active');
+    });
+    
+    // Forgot Password Steps Navigation
+    document.getElementById('next-step-1').addEventListener('click', function() {
+        if (validateForgotStep1()) {
+            showStep('forgot', 2);
             const email = document.getElementById('reset-email').value;
             document.querySelector('.user-email').textContent = email;
-        });
-    }
-    
-    if (nextStep2) {
-        nextStep2.addEventListener('click', function() {
-            goToStep(3);
-        });
-    }
-    
-    if (backStep2) {
-        backStep2.addEventListener('click', function() {
-            goToStep(1);
-        });
-    }
-    
-    if (backStep3) {
-        backStep3.addEventListener('click', function() {
-            goToStep(2);
-        });
-    }
-    
-    function goToStep(step) {
-        document.querySelectorAll('.step-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.querySelector(`.step-content[data-step="${step}"]`).classList.add('active');
-        
-        document.querySelectorAll('.step').forEach(stepEl => {
-            stepEl.classList.remove('active');
-        });
-        document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
-    }
-
-    // Role Selection
-    const roleCards = document.querySelectorAll('.role-card');
-    const farmerRegistration = document.getElementById('farmer-registration');
-    const buyerRegistration = document.getElementById('buyer-registration');
-    const roleSelection = document.getElementById('role-selection');
-    const backToRoleFarmer = document.getElementById('back-to-role-farmer');
-    const backToRoleBuyer = document.getElementById('back-to-role-buyer');
-    
-    roleCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const role = this.getAttribute('data-role');
-            roleSelection.classList.remove('active');
-            
-            if (role === 'farmer') {
-                farmerRegistration.classList.add('active');
-            } else {
-                buyerRegistration.classList.add('active');
-            }
-        });
+            startOTPTimer();
+        }
     });
     
-    if (backToRoleFarmer) {
-        backToRoleFarmer.addEventListener('click', function() {
-            farmerRegistration.classList.remove('active');
-            roleSelection.classList.add('active');
-        });
-    }
-    
-    if (backToRoleBuyer) {
-        backToRoleBuyer.addEventListener('click', function() {
-            buyerRegistration.classList.remove('active');
-            roleSelection.classList.add('active');
-        });
-    }
-
-    // Farmer Registration Steps
-    const nextFarmerStep1 = document.getElementById('next-farmer-step-1');
-    const nextFarmerStep2 = document.getElementById('next-farmer-step-2');
-    const backFarmerStep2 = document.getElementById('back-farmer-step-2');
-    const backFarmerStep3 = document.getElementById('back-farmer-step-3');
-    
-    if (nextFarmerStep1) {
-        nextFarmerStep1.addEventListener('click', function() {
-            goToFarmerStep(2);
-        });
-    }
-    
-    if (nextFarmerStep2) {
-        nextFarmerStep2.addEventListener('click', function() {
-            goToFarmerStep(3);
-        });
-    }
-    
-    if (backFarmerStep2) {
-        backFarmerStep2.addEventListener('click', function() {
-            goToFarmerStep(1);
-        });
-    }
-    
-    if (backFarmerStep3) {
-        backFarmerStep3.addEventListener('click', function() {
-            goToFarmerStep(2);
-        });
-    }
-    
-    function goToFarmerStep(step) {
-        document.querySelectorAll('.register-form.step-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.querySelector(`.register-form.step-content[data-step="${step}"]`).classList.add('active');
-        
-        document.querySelectorAll('.farmer-registration .step').forEach(stepEl => {
-            stepEl.classList.remove('active');
-        });
-        document.querySelector(`.farmer-registration .step[data-step="${step}"]`).classList.add('active');
-    }
-
-    // Buyer Registration Steps
-    const nextBuyerStep1 = document.getElementById('next-buyer-step-1');
-    const backBuyerStep2 = document.getElementById('back-buyer-step-2');
-    
-    if (nextBuyerStep1) {
-        nextBuyerStep1.addEventListener('click', function() {
-            goToBuyerStep(2);
-        });
-    }
-    
-    if (backBuyerStep2) {
-        backBuyerStep2.addEventListener('click', function() {
-            goToBuyerStep(1);
-        });
-    }
-    
-    function goToBuyerStep(step) {
-        document.querySelectorAll('.register-form.step-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.querySelector(`.register-form.step-content[data-step="${step}"]`).classList.add('active');
-        
-        document.querySelectorAll('.buyer-registration .step').forEach(stepEl => {
-            stepEl.classList.remove('active');
-        });
-        document.querySelector(`.buyer-registration .step[data-step="${step}"]`).classList.add('active');
-    }
-
-    // File Upload Display
-    const fileInputs = document.querySelectorAll('input[type="file"]');
-    fileInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
-            const fileSize = this.files[0] ? formatFileSize(this.files[0].size) : '';
-            
-            const container = this.closest('.file-upload');
-            const nameElement = container.querySelector('.file-name');
-            const sizeElement = container.querySelector('.file-size');
-            
-            nameElement.textContent = fileName;
-            sizeElement.textContent = fileSize;
-        });
+    document.getElementById('back-step-2').addEventListener('click', function() {
+        showStep('forgot', 1);
     });
     
-    function formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
-    }
-
-    // Password Strength Checker
-    const passwordInputs = document.querySelectorAll('input[type="password"]');
-    passwordInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            if (this.id.includes('password') && !this.id.includes('confirm')) {
-                checkPasswordStrength(this);
-            }
-        });
+    document.getElementById('next-step-2').addEventListener('click', function() {
+        if (validateForgotStep2()) {
+            showStep('forgot', 3);
+        }
     });
     
-    function checkPasswordStrength(input) {
-        const password = input.value;
-        const container = input.closest('.input-group');
-        const meter = container.querySelector('.strength-meter');
-        const text = container.querySelector('.strength-text');
-        const bars = container.querySelectorAll('.strength-bar');
-        const requirements = container.querySelectorAll('.password-requirements li');
-        
-        // Reset all
-        bars.forEach(bar => bar.style.backgroundColor = '');
-        requirements.forEach(req => req.classList.remove('valid'));
-        
-        if (!password) {
-            text.textContent = '';
-            return;
-        }
-        
-        // Check requirements
-        const hasLength = password.length >= 8;
-        const hasUpper = /[A-Z]/.test(password);
-        const hasNumber = /\d/.test(password);
-        const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-        
-        if (hasLength) {
-            container.querySelector('.req-length').classList.add('valid');
-        }
-        if (hasUpper) {
-            container.querySelector('.req-uppercase').classList.add('valid');
-        }
-        if (hasNumber) {
-            container.querySelector('.req-number').classList.add('valid');
-        }
-        if (hasSpecial) {
-            container.querySelector('.req-special').classList.add('valid');
-        }
-        
-        // Determine strength
-        let strength = 0;
-        if (password.length > 0) strength += 1;
-        if (password.length >= 8) strength += 1;
-        if (hasUpper && hasNumber) strength += 1;
-        if (hasUpper && hasNumber && hasSpecial) strength += 1;
-        
-        // Update UI
-        if (strength === 0) {
-            text.textContent = '';
-        } else if (strength <= 2) {
-            text.textContent = 'Weak';
-            bars[0].style.backgroundColor = "var(--danger-color)";
-            bars[0].classList.add('weak');
-        } else if (strength === 3) {
-            text.textContent = 'Medium';
-            bars[0].style.backgroundColor = "var(--warning-color)";
-            bars[1].style.backgroundColor = "var(--warning-color)";
-        } else {
-            text.textContent = 'Strong';
-            bars[0].style.backgroundColor = "var(--success-color)";
-            bars[1].style.backgroundColor = "var(--success-color)";
-            bars[2].style.backgroundColor = "var(--success-color)";
-        }
-    }
-
-    // OTP Input Auto Focus
+    document.getElementById('back-step-3').addEventListener('click', function() {
+        showStep('forgot', 2);
+    });
+    
+    // OTP Input Handling
     const otpInputs = document.querySelectorAll('.otp-inputs input');
     otpInputs.forEach((input, index) => {
         input.addEventListener('input', function() {
-            if (this.value.length === 1 && index < otpInputs.length - 1) {
-                otpInputs[index + 1].focus();
+            if (this.value.length === 1) {
+                if (index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
             }
         });
         
         input.addEventListener('keydown', function(e) {
-            if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
-                otpInputs[index - 1].focus();
+            if (e.key === 'Backspace' && this.value.length === 0) {
+                if (index > 0) {
+                    otpInputs[index - 1].focus();
+                }
             }
         });
     });
+    
+    // Resend OTP Link
+    document.querySelector('.resend-otp').addEventListener('click', function(e) {
+        e.preventDefault();
+        startOTPTimer();
+    });
+    
+    // Password Strength Check
+    const passwordInputs = document.querySelectorAll('input[type="password"]');
+    passwordInputs.forEach(input => {
+        if (input.id.includes('password') && !input.id.includes('confirm')) {
+            input.addEventListener('input', function() {
+                checkPasswordStrength(this);
+            });
+        }
+    });
+    
+    // Helper Functions
+    function showStep(formType, stepNumber) {
+        const steps = document.querySelectorAll(`#${formType}-form .step-content`);
+        steps.forEach(step => {
+            step.classList.remove('active');
+        });
+        
+        // Show the selected step
+        document.querySelector(`#${formType}-form .step-content[data-step="${stepNumber}"]`).classList.add('active');
+        
+        // Update progress steps
+        const progressSteps = document.querySelectorAll(`#${formType}-form .step`);
+        progressSteps.forEach(step => {
+            step.classList.remove('active', 'completed');
+            
+            const stepValue = parseInt(step.getAttribute('data-step'));
+            if (stepValue < stepNumber) {
+                step.classList.add('completed');
+            } else if (stepValue === stepNumber) {
+                step.classList.add('active');
+            }
+        });
+        
+        // Scroll to top of form
+        document.querySelector(`#${formType}-form`).scrollTo(0, 0);
+    }
+    
+    function validateForgotStep1() {
+        const email = document.getElementById('reset-email');
+        if (!email.value.trim()) {
+            email.style.borderColor = '#ff6b6b';
+            return false;
+        }
+        email.style.borderColor = '#e3f2fd';
+        return true;
+    }
+    
+    function validateForgotStep2() {
+        let isValid = true;
+        const otpInputs = document.querySelectorAll('.otp-inputs input');
+        
+        otpInputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.style.borderColor = '#ff6b6b';
+                isValid = false;
+            } else {
+                input.style.borderColor = '#e3f2fd';
+            }
+        });
+        
+        return isValid;
+    }
+    
+    function startOTPTimer() {
+        let timeLeft = 120;
+        const timerElement = document.querySelector('.timer');
+        const resendLink = document.querySelector('.resend-otp');
+        
+        resendLink.style.display = 'none';
+        
+        const timer = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            timerElement.textContent = `(${minutes}:${seconds < 10 ? '0' : ''}${seconds})`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timerElement.textContent = '';
+                resendLink.style.display = 'inline';
+            }
+            
+            timeLeft--;
+        }, 1000);
+    }
+    
+    function checkPasswordStrength(input) {
+        const password = input.value;
+        const strengthMeter = input.closest('.input-group').querySelector('.strength-meter');
+        const strengthText = input.closest('.input-group').querySelector('.strength-text');
+        const bars = strengthMeter.querySelectorAll('.strength-bar');
+        
+        // Reset all
+        bars.forEach(bar => bar.style.backgroundColor = '#ddd');
+        strengthText.textContent = 'Weak';
+        strengthText.style.color = '#666';
+        
+        // Check strength
+        let strength = 0;
+        
+        // Length requirement
+        if (password.length >= 8) strength++;
+        
+        // Uppercase requirement
+        if (/[A-Z]/.test(password)) strength++;
+        
+        // Number requirement
+        if (/[0-9]/.test(password)) strength++;
+        
+        // Special char requirement
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+        
+        // Update meter
+        if (strength > 0) {
+            for (let i = 0; i < strength; i++) {
+                if (strength < 2) {
+                    bars[i].style.backgroundColor = '#ff6b6b';
+                    strengthText.textContent = 'Weak';
+                    strengthText.style.color = '#ff6b6b';
+                } else if (strength < 3) {
+                    bars[i].style.backgroundColor = '#ffd93d';
+                    strengthText.textContent = 'Medium';
+                    strengthText.style.color = '#ffd93d';
+                } else {
+                    bars[i].style.backgroundColor = '#6bcf7f';
+                    strengthText.textContent = 'Strong';
+                    strengthText.style.color = '#6bcf7f';
+                }
+            }
+        }
+    }
 });

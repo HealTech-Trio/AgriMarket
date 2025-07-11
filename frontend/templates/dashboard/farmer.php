@@ -137,7 +137,7 @@
                 <!-- Dashboard Overview -->
                 <section class="content-section active" id="dashboard-content">
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card stat-products">
                             <div class="stat-icon">
                                 <i class="fas fa-boxes"></i>
                             </div>
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat-orders">
                             <div class="stat-icon">
                                 <i class="fas fa-clipboard-list"></i>
                             </div>
@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat-rating">
                             <div class="stat-icon">
                                 <i class="fas fa-star"></i>
                             </div>
@@ -167,7 +167,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat-deliveries">
                             <div class="stat-icon">
                                 <i class="fas fa-truck"></i>
                             </div>
@@ -784,7 +784,7 @@
                         </div>
                         
                         <div class="table-content">
-                            <div class="table-row header">
+                            <div class="transactions-header">
                                 <div class="col date">Date</div>
                                 <div class="col description">Description</div>
                                 <div class="col amount">Amount</div>
@@ -792,7 +792,7 @@
                                 <div class="col invoice">Invoice</div>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="transactions-row">
                                 <div class="col date">15 Jun 2025</div>
                                 <div class="col description">Payment for Order #ORD-00120</div>
                                 <div class="col amount">R 1,250.00</div>
@@ -804,7 +804,7 @@
                                 </div>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="transactions-row">
                                 <div class="col date">10 Jun 2025</div>
                                 <div class="col description">Payment for Order #ORD-00118</div>
                                 <div class="col amount">R 980.00</div>
@@ -816,7 +816,7 @@
                                 </div>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="transactions-row">
                                 <div class="col date">5 Jun 2025</div>
                                 <div class="col description">Payment for Order #ORD-00115</div>
                                 <div class="col amount">R 1,750.00</div>
@@ -828,7 +828,7 @@
                                 </div>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="transactions-row">
                                 <div class="col date">1 Jun 2025</div>
                                 <div class="col description">Withdrawal to Bank Account</div>
                                 <div class="col amount">- R 5,000.00</div>

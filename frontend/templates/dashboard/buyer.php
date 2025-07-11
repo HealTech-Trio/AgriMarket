@@ -31,7 +31,7 @@
                 <ul class="main-links">
                     <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#"><i class="fas fa-search"></i> Discover</a></li>
-                    <li><a href="#"><i class="fas fa-store"></i> Farmers</a></li>
+                    <li><a href="#" class="farmers-near"><i class="fas fa-store"></i> Farmers</a></li>
                     <li><a href="#"><i class="fas fa-tag"></i> Deals</a></li>
                 </ul>
                 
@@ -100,6 +100,167 @@
 
     <!-- Buyer Dashboard Content -->
     <main class="buyer-content">
+
+        <!-- Farmers Near Me Content -->
+        <section class="farmers-near-container" style="display: none;">
+            <div class="container">
+                <div class="farmers-near-wrapper">
+                    <!-- Fixed Search and Sort Bar -->
+                    <div class="farmers-search-sort">
+                        <div class="farmers-search">
+                            <input type="text" placeholder="Search farmers by name or location...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="farmers-sort">
+                            <span>Sort by:</span>
+                            <select>
+                                <option>Distance (nearest first)</option>
+                                <option>Rating (highest first)</option>
+                                <option>Alphabetical (A-Z)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Farmers List and Map -->
+                    <div class="farmers-content">
+                        <!-- Farmers List Sidebar -->
+                        <aside class="farmers-sidebar">
+                            <div class="farmers-list">
+                                <!-- Farmer Card 1 -->
+                                <div class="farmer-card">
+                                    <div class="farmer-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Farmer Avatar">
+                                        <span class="farmer-status online"></span>
+                                    </div>
+                                    <div class="farmer-info">
+                                        <h3>Green Valley Organic Farm</h3>
+                                        <div class="farmer-meta">
+                                            <span class="farmer-rating">
+                                                <i class="fas fa-star"></i> 4.8 (124)
+                                            </span>
+                                            <span class="farmer-distance">
+                                                <i class="fas fa-map-marker-alt"></i> 2.5 km away
+                                            </span>
+                                        </div>
+                                        <div class="farmer-specialties">
+                                            <span class="specialty">Organic</span>
+                                            <span class="specialty">Vegetables</span>
+                                            <span class="specialty">Dairy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Farmer Card 2 -->
+                                <div class="farmer-card">
+                                    <div class="farmer-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Farmer Avatar">
+                                        <span class="farmer-status offline"></span>
+                                    </div>
+                                    <div class="farmer-info">
+                                        <h3>Sunshine Fruit Orchards</h3>
+                                        <div class="farmer-meta">
+                                            <span class="farmer-rating">
+                                                <i class="fas fa-star"></i> 4.6 (89)
+                                            </span>
+                                            <span class="farmer-distance">
+                                                <i class="fas fa-map-marker-alt"></i> 5.1 km away
+                                            </span>
+                                        </div>
+                                        <div class="farmer-specialties">
+                                            <span class="specialty">Fruits</span>
+                                            <span class="specialty">Juices</span>
+                                            <span class="specialty">Jam</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Farmer Card 3 -->
+                                <div class="farmer-card">
+                                    <div class="farmer-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Farmer Avatar">
+                                        <span class="farmer-status online"></span>
+                                    </div>
+                                    <div class="farmer-info">
+                                        <h3>Mountain View Dairy</h3>
+                                        <div class="farmer-meta">
+                                            <span class="farmer-rating">
+                                                <i class="fas fa-star"></i> 4.9 (156)
+                                            </span>
+                                            <span class="farmer-distance">
+                                                <i class="fas fa-map-marker-alt"></i> 7.8 km away
+                                            </span>
+                                        </div>
+                                        <div class="farmer-specialties">
+                                            <span class="specialty">Dairy</span>
+                                            <span class="specialty">Cheese</span>
+                                            <span class="specialty">Yogurt</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Farmer Card 4 -->
+                                <div class="farmer-card">
+                                    <div class="farmer-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Farmer Avatar">
+                                        <span class="farmer-status online"></span>
+                                    </div>
+                                    <div class="farmer-info">
+                                        <h3>Riverbend Poultry Farm</h3>
+                                        <div class="farmer-meta">
+                                            <span class="farmer-rating">
+                                                <i class="fas fa-star"></i> 4.7 (102)
+                                            </span>
+                                            <span class="farmer-distance">
+                                                <i class="fas fa-map-marker-alt"></i> 12.3 km away
+                                            </span>
+                                        </div>
+                                        <div class="farmer-specialties">
+                                            <span class="specialty">Eggs</span>
+                                            <span class="specialty">Poultry</span>
+                                            <span class="specialty">Organic</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Farmer Card 5 -->
+                                <div class="farmer-card">
+                                    <div class="farmer-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="Farmer Avatar">
+                                        <span class="farmer-status offline"></span>
+                                    </div>
+                                    <div class="farmer-info">
+                                        <h3>Golden Grain Fields</h3>
+                                        <div class="farmer-meta">
+                                            <span class="farmer-rating">
+                                                <i class="fas fa-star"></i> 4.5 (76)
+                                            </span>
+                                            <span class="farmer-distance">
+                                                <i class="fas fa-map-marker-alt"></i> 15.6 km away
+                                            </span>
+                                        </div>
+                                        <div class="farmer-specialties">
+                                            <span class="specialty">Grains</span>
+                                            <span class="specialty">Flour</span>
+                                            <span class="specialty">Bread</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                        
+                        <!-- Farmers Map -->
+                        <div class="farmers-map">
+                            <div class="map-placeholder">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Interactive Farmers Map</h3>
+                                <p>Farmers locations will be displayed here with markers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="container">
             <!-- Sidebar Filters -->
             <aside class="buyer-sidebar">
@@ -462,7 +623,7 @@
                     <a href="#">3</a>
                     <a href="#"><i class="fas fa-chevron-right"></i></a>
                 </div>
-            </section>
+            </section>            
         </div>
     </main>
 
@@ -479,7 +640,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">My Orders</a></li>
-                        <li><a href="#">Farmers Near Me</a></li>
+                        <li><a href="#" class="farmers-near">Farmers Near Me</a></li>
                         <li><a href="#">Deals</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -499,5 +660,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="../../scripts/farmers-near.js"></script>
+
 </body>
 </html>
