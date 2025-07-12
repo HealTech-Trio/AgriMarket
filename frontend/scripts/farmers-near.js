@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const farmersContent = document.querySelector('.farmers-near-container');
     const homeLinks = document.querySelectorAll('.main-links li:first-child a');
     const products_sidebar = document.querySelector('.buyer-sidebar');
+    const cartContent = document.querySelector('.cart-container');
+
     
     // Initially hide the farmers content
     if (farmersContent) {
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mainContent) {
             mainContent.style.display = 'none';
             products_sidebar.style.display = 'none';
+            cartContent.style.display = 'none';
         }
         
         if (farmersContent) {
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (farmersContent) {
             farmersContent.style.display = 'none';
+            cartContent.style.display = 'none';
         }
         
         // Update active state in navigation

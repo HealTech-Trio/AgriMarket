@@ -22,7 +22,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #f5f7fa 0%, #a0c1f2 100%);
+    overflow-x: hidden;
+    scrollbar-width: none;
+
 }
 
 a {
@@ -563,4 +566,11 @@ a {
     .products {
         grid-template-columns: 1fr;
     }
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body, html {
+    scrollbar-width: none;
 }
