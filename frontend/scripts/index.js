@@ -11,12 +11,12 @@ fetch("http://localhost/AgriMarket/backend/products/get_products_index.php")
             product_card.innerHTML = (`
                 <div class="product-card">
                     <div class="product-image">
-                        <img src=${product.product_image_url} alt="Fresh Apples">
+                        <img src=${product.product_image_url} alt="product image">
                         <span class="stock-badge">${product.quantity}</span>
                     </div>
                     <div class="product-info">
                         <h3>${product.product_name}</h3>
-                        <div class="price">R${product.price} / ${product.weight}</div>
+                        <div class="price">R ${product.price} / ${product.weight}</div>
                         <div class="supplier-info">
                             <div class="supplier-name">${product.farm_name}</div>
                             <div class="supplier-location">${product.location}</div>
