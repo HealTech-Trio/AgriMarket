@@ -223,6 +223,7 @@
 /* Buyer Sidebar */
 .buyer-sidebar {
     width: 250px;
+    height: auto;
     float: left;
     background-color: white;
     border-radius: 5px;
