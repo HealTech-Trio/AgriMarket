@@ -3,11 +3,10 @@ let products = document.querySelector(".products")
 fetch("http://localhost/AgriMarket/backend/products/get_products_index.php")
     .then(response => response.json())
     .then(data => {
-
+        console.log(data);
         data.forEach(product => {
             let product_card = document.createElement('div');
             product_card.setAttribute("class", "product-card");
-
             product_card.innerHTML = (`
                 <div class="product-card">
                     <div class="product-image">
@@ -19,7 +18,7 @@ fetch("http://localhost/AgriMarket/backend/products/get_products_index.php")
                         <div class="price">R ${product.price} / ${product.weight}</div>
                         <div class="supplier-info">
                             <div class="supplier-name">${product.farm_name}</div>
-                            <div class="supplier-location">${product.location}</div>
+                            <div class="supplier-location">${product.farm_location}</div>
                         </div>
                         <div class="product-actions">
                             <button class="contact-btn">Contact Supplier</button>

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <i class="fas fa-star-half-alt"></i>
                                 <span>4.5</span>
                             </div>
-                            <div class="supplier-name">${product.farm_name}</div>
+                            <div class="supplier-name">${product.full_name}</div>
                             <div class="supplier-location"><i class="fas fa-map-marker-alt"></i> 15km away</div>
                         </div>
                         <div class="product-actions">

@@ -9,7 +9,10 @@ error_reporting(E_ALL);
 $mysqli = require_once "../config/database.php";
 
 // Query the products
-$sql = "SELECT * FROM products";
+$sql = "SELECT *
+        FROM products
+        LEFT JOIN farmers ON products.farmer_id = farmers.farmer_id;
+    ";
 $result = $mysqli->query($sql);
 
 $products = [];
