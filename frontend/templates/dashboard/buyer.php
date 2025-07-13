@@ -331,26 +331,7 @@
                                 <span class="checkmark"></span>
                             </label>
                         </div>
-                    </div>
-                    
-                    <!-- Order Options -->
-                    <div class="filter-group">
-                        <h4>Order Options</h4>
-                        <div class="order-options">
-                            <label class="checkbox-container">Same-day Delivery
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="checkbox-container">Bulk Discounts
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="checkbox-container">Subscription Available
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
             </aside>
 
@@ -424,6 +405,157 @@
                 </div>
             </section>
         </div>
+
+        <!-- Cart Content  -->
+        <section class="cart-container" style="display: none;">
+            <div class="container">
+                <div class="cart-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+                    <span class="cart-count">3 items</span>
+                </div>
+                
+                <div class="cart-wrapper">
+                    <!-- Left Side - Cart Items -->
+                    <div class="cart-items">
+                        <!-- Seller Group 1 -->
+                        <div class="seller-group">
+                            <div class="seller-header">
+                                <div class="seller-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Seller">
+                                </div>
+                                <h3>Green Valley Organic Farm</h3>
+                            </div>
+                            
+                            <!-- Cart Item 1 -->
+                            <div class="cart-item">
+                                <div class="item-image">
+                                    <img src="https://static4.depositphotos.com/1020804/343/i/950/depositphotos_3434099-stock-photo-fruits.jpg" alt="Product">
+                                </div>
+                                <div class="item-details">
+                                    <h4>Fresh Red Apples</h4>
+                                    <div class="item-meta">
+                                        <span class="item-category">Fruits</span>
+                                        <span class="item-weight">10kg</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <span class="current-price">R 55.00</span>
+                                        <span class="original-price">R 65.00</span>
+                                    </div>
+                                </div>
+                                <div class="item-actions">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" value="2" min="1" class="quantity-input">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
+                                    <div class="item-total">
+                                        R 110.00
+                                    </div>
+                                    <button class="remove-btn"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                            
+                            <!-- Cart Item 2 -->
+                            <div class="cart-item">
+                                <div class="item-image">
+                                    <img src="https://tse3.mm.bing.net/th/id/OIP.CyJLvdoWCD8uETyeCKrniAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Product">
+                                </div>
+                                <div class="item-details">
+                                    <h4>Organic Tomatoes</h4>
+                                    <div class="item-meta">
+                                        <span class="item-category">Vegetables</span>
+                                        <span class="item-weight">5kg</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <span class="current-price">R 45.00</span>
+                                    </div>
+                                </div>
+                                <div class="item-actions">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" value="1" min="1" class="quantity-input">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
+                                    <div class="item-total">
+                                        R 45.00
+                                    </div>
+                                    <button class="remove-btn"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Seller Group 2 -->
+                        <div class="seller-group">
+                            <div class="seller-header">
+                                <div class="seller-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Seller">
+                                </div>
+                                <h3>Sunshine Fruit Orchards</h3>
+                            </div>
+                            
+                            <!-- Cart Item 3 -->
+                            <div class="cart-item">
+                                <div class="item-image">
+                                    <img src="https://tse2.mm.bing.net/th/id/OIP._ZMHcD5rUmHNE0c3NuRDIgHaE7?w=2000&h=1333&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Product">
+                                </div>
+                                <div class="item-details">
+                                    <h4>Hass Avocados</h4>
+                                    <div class="item-meta">
+                                        <span class="item-category">Fruits</span>
+                                        <span class="item-weight">5kg</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <span class="current-price">R 90.00</span>
+                                    </div>
+                                </div>
+                                <div class="item-actions">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" value="1" min="1" class="quantity-input">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
+                                    <div class="item-total">
+                                        R 90.00
+                                    </div>
+                                    <button class="remove-btn"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side - Order Summary -->
+                    <aside class="cart-summary">
+                        <div class="summary-card">
+                            <h3>Order Summary</h3>
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Subtotal (3 items)</span>
+                                    <span>R 245.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Delivery Fee</span>
+                                    <span>R 25.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Estimated Tax</span>
+                                    <span>R 30.75</span>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-row total">
+                                    <span>Total</span>
+                                    <span>R 300.75</span>
+                                </div>
+                            </div>
+                            <button class="checkout-btn">Proceed to Checkout</button>
+                            <div class="secure-checkout">
+                                <i class="fas fa-lock"></i>
+                                <span>Secure Checkout</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer Section -->
@@ -460,8 +592,8 @@
         </div>
     </footer>
 
-    <script src="../../../frontend/scripts/buyer.js"></script>
+    <script src="../../scripts/buyer.js"></script>
     <script src="../../scripts/farmers-near.js"></script>
-
+    <script src="../../scripts/cart.js"></script>
 </body>
 </html>

@@ -42,7 +42,25 @@ document.addEventListener('DOMContentLoaded', function() {
       updateChart(this.textContent.trim());
     });
   });
-  
+
+  // Promotion toggle logic
+  const promotionToggle = document.getElementById('promotion-toggle');
+  const promotionFields = document.getElementById('promotion-fields');
+  if (promotionToggle && promotionFields) {
+    promotionToggle.addEventListener('change', function() {
+      promotionFields.style.display = this.checked ? 'block' : 'none';
+    });
+  }
+
+  // Auto Sync quantity unit with price unit
+  const quantityUnit = document.getElementById('quantity-unit');
+  const priceUnit = document.getElementById('price-unit');
+  if (quantityUnit && priceUnit) {
+    quantityUnit.addEventListener('change', function() {
+      priceUnit.textContent = '/' + this.value;
+    });
+  }
+
   // Initialize Chart
   initializeChart();
   

@@ -274,6 +274,7 @@
                                     <option>Dairy</option>
                                     <option>Meat</option>
                                     <option>Herbs</option>
+                                    <option>Organic</option>
                                 </select>
                             </div>
                         </div>
@@ -283,7 +284,7 @@
                                 <label for="product-quantity">Quantity Available</label>
                                 <div class="input-with-unit">
                                     <input type="number" id="product-quantity" placeholder="100">
-                                    <select class="unit-select">
+                                    <select class="unit-select" id="quantity-unit">
                                         <option>kg</option>
                                         <option>g</option>
                                         <option>lbs</option>
@@ -296,7 +297,7 @@
                                 <div class="input-with-currency">
                                     <span>R</span>
                                     <input type="number" id="product-price" placeholder="45.00">
-                                    <span class="unit">/kg</span>
+                                    <span class="unit" id="price-unit">/kg</span>
                                 </div>
                             </div>
                         </div>
@@ -307,17 +308,72 @@
                         </div>
                         
                         <div class="form-group">
+                            <label class="toggle-label" for="promotion-toggle">
+                                <span>Enable Promotion</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="promotion-toggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </label>
+                        </div>
+                        <div id="promotion-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="promotion-name">Promotion Name</label>
+                                <input type="text" id="promotion-name" placeholder="e.g., Winter Sale">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="promotion-code">Promotion Code/Number</label>
+                                    <input type="text" id="promotion-code" placeholder="e.g., WINTER2025">
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-type">Discount Type</label>
+                                    <select id="promotion-type">
+                                        <option value="percentage">Percentage (%)</option>
+                                        <option value="amount">Fixed Amount</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-value">Discount Value</label>
+                                    <input type="number" id="promotion-value" placeholder="e.g., 10">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="promotion-start">Start Date</label>
+                                    <input type="date" id="promotion-start">
+                                </div>
+                                <div class="form-group">
+                                    <label for="promotion-end">End Date</label>
+                                    <input type="date" id="promotion-end">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label>Product Images</label>
                             <div class="image-upload">
                                 <div class="upload-preview">
-                                    <div class="preview-item">
+                                    <div class="preview-item" id="index-1">
                                         <i class="fas fa-plus"></i>
-                                        <span>Add Image</span>
+                                        <span>Add Image 1</span>
                                         <input type="file" accept="image/*">
                                     </div>
-                                    <div class="preview-item empty"></div>
-                                    <div class="preview-item empty"></div>
-                                    <div class="preview-item empty"></div>
+                                    <div class="preview-item empty" id="index-2">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Add Image 2</span>
+                                        <input type="file" accept="image/*">
+                                    </div>
+                                    <div class="preview-item empty" id="index-3">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Add Image 3</span>
+                                        <input type="file" accept="image/*">
+                                    </div>
+                                    <div class="preview-item empty" id="index-4">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Add Image 4</span>
+                                        <input type="file" accept="image/*">
+                                    </div>
                                 </div>
                                 <p class="upload-note">Upload up to 4 images (First image will be the main display)</p>
                             </div>
