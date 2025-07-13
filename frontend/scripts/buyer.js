@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <h3>${product.product_name}</h3>
                         <div class="price">
                             <span class="current-price">R ${discounted_price} / ${product.weight}</span>
-                            <span class="original-price">R ${product.price}</span>
+                            <span class="original-price" style="display: ${discount_style}">R ${product.price}</span>
                         </div>
                         <div class="supplier-info">
                             <div class="rating">
