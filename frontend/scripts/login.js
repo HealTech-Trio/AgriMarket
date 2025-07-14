@@ -212,3 +212,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Form submission for login check
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector(".login-form");
+
+    loginForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(loginForm);
+        const email = formData.get("email");
+        const password = formData.get("password");
+
+        fetch("http://localhost/AgriMarket/backend/logins/login.php", {
+            method: "POST",
+            body: new URLSearchParams({
+                email,
+                password
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success && data.redirect) {
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(err => {
+            alert("Something went wrong.");
+            console.error(err);
+        });
+    });
+});
