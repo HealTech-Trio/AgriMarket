@@ -104,6 +104,75 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Buyer registration
+    document.querySelector("#buyer-registration form[data-step='2']").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const data = {
+            name: document.getElementById("buyer-name").value,
+            email: document.getElementById("buyer-email").value,
+            phone: document.getElementById("buyer-phone").value,
+            province: document.getElementById("buyer-province").value,
+            category: document.getElementById("buyer-category").value,
+            password: document.getElementById("buyer-password").value,
+        };
+
+        fetch("http://localhost/AgriMarket/backend/logins/buyer-register.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => {
+            if (result.success) {
+                alert("Registration successful!");
+                window.location.href = "login.html";
+            } else {
+                alert(result.message);
+            }
+        })
+        .catch(err => {
+            alert("Something went wrong.");
+            console.error(err);
+        });
+    });
+
+    // Farmer registration
+    const form = document.querySelector("#farmer-registration form[data-step='3']");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        // Collect all values from steps 1, 2, 3
+        formData.append("full_name", document.getElementById("farmer-name").value);
+        formData.append("email", document.getElementById("farmer-email").value);
+        formData.append("phone", document.getElementById("farmer-phone").value);
+        formData.append("province", document.getElementById("farmer-province").value);
+        formData.append("farm_name", document.getElementById("farm-name").value);
+        formData.append("farm_location", document.getElementById("farm-location").value);
+        formData.append("id_number", document.getElementById("farm-id").value);
+        formData.append("id_document", document.getElementById("farm-document").files[0]);
+        formData.append("farm_type", document.getElementById("farm-type").value);
+        formData.append("years_in_operation", document.getElementById("farm-years").value);
+        formData.append("password", document.getElementById("farmer-password").value);
+        formData.append("confirm_password", document.getElementById("farmer-confirm-password").value);
+
+        fetch("http://localhost/AgriMarket/backend/logins/farmer-register.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(result => {
+            alert(result.message);
+            if (result.success) window.location.href = "login.html";
+        })
+        .catch(err => {
+            alert("Something went wrong");
+            console.error(err);
+        });
+    });
+
     function showStep(userType, stepNumber) {
         // Hide all steps for this user type
         const steps = document.querySelectorAll(`#${userType}-registration .step-content`);

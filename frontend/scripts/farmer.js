@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
+  
+  // // Fetch user data from sessionStorage
+  // const user = JSON.parse(sessionStorage.getItem("userData"));
+
+  // if (user) {
+  //   document.querySelectorAll(".user-name").forEach((el) => {
+  //     el.textContent = user.profile.full_name;
+  //   });
+  // }
+
+  document.querySelectorAll(".logout").forEach(btn => {
+    btn.addEventListener("click", () => {
+      fetch("http://localhost/AgriMarket/backend/logins/logout.php", {
+        method: "POST"
+      })
+      .then(() => {
+        sessionStorage.clear();
+        window.location.href = "../../index.html"; // Redirect screen
+      })
+      .catch(err => {
+        console.error("Logout failed", err);
+      });
+    });
+  });
+
   // Tab Switching Functionality
   const menuLinks = document.querySelectorAll('.sidebar-menu a');
   const contentSections = document.querySelectorAll('.content-section');
@@ -50,6 +75,17 @@ document.addEventListener('DOMContentLoaded', function() {
     promotionToggle.addEventListener('change', function() {
       promotionFields.style.display = this.checked ? 'block' : 'none';
     });
+  }
+
+  // Availability toggle logic
+  const availabilityToggle = document.getElementById('availability-toggle');
+  const availabilityFields = document.getElementById('availability-fields');
+  if (availabilityToggle && availabilityFields) {
+    availabilityToggle.addEventListener('change', function() {
+      availabilityFields.style.display = this.checked ? 'block' : 'none';
+    });
+    // Show fields if checked on load
+    availabilityFields.style.display = availabilityToggle.checked ? 'block' : 'none';
   }
 
   // Auto Sync quantity unit with price unit
