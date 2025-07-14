@@ -26,7 +26,7 @@
                         <img src="../../assets/images/josh.jpg" alt="Farmer Profile">
                     </div>
                     <div class="profile-info">
-                        <h3>Thando Nkosi</h3>
+                        <h3 class="user-name">User</h3>
                         <p>Farmer Account</p>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
             <!-- Fixed Header -->
             <header class="main-header">
                 <div class="header-left">
-                    <h1>Welcome back, Thando</h1>
+                    <h1>Welcome back, <span class="user-name">User</span></h1>
                     <p>Here's what's happening with your farm today</p>
                 </div>
                 
@@ -125,7 +125,7 @@
                                 <a href="#"><i class="fas fa-user-cog"></i> Settings</a>
                                 <a href="#"><i class="fas fa-question-circle"></i> Help</a>
                                 <div class="divider"></div>
-                                <a href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                                <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                             </div>
                         </div>
                     </div>
@@ -384,11 +384,18 @@
                                 <label class="toggle-label">
                                     <span>Availability</span>
                                     <label class="toggle-switch">
-                                        <input type="checkbox" checked>
+                                        <input type="checkbox" id="availability-toggle" checked>
                                         <span class="slider"></span>
                                     </label>
                                     <span class="toggle-status">In Stock</span>
                                 </label>
+                                <div id="availability-fields" style="display: none; margin-top: 10px;">
+                                    <label for="availability-start" style="font-weight: 500;">Available From:</label>
+                                    <input type="date" id="availability-start">
+                                    <div class="availability-message" style="margin-top: 8px; color: #218838;">
+                                        This product will be available for buyers starting from the selected date.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -913,7 +920,7 @@
                                     <img src="../../assets/images/josh.jpg" alt="Profile">
                                     <button class="edit-avatar"><i class="fas fa-camera"></i></button>
                                 </div>
-                                <h3>Thando Nkosi</h3>
+                                <h3 class="user-name">User</h3>
                                 <p>Farmer Account</p>
                                 <div class="profile-stats">
                                     <div class="stat-item">
