@@ -2,7 +2,6 @@
     header("Content-Type: application/json");
     $mysqli = require_once "../config/database.php";
 
-    // Set upload directory
     $uploadDir = __DIR__ . "/../../uploads/farm-ids/";    
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);

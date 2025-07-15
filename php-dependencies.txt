@@ -1,6 +1,6 @@
 
 # These dependencies must be run inside the backend folder and run one by one
 
+composer require vlucas/phpdotenv
 composer require google/apiclient
 composer require phpmailer/phpmailer vlucas/phpdotenv
-composer require vlucas/phpdotenv
