@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
 
         data.forEach(product => {
+            console.log(product);
             let product_card = document.createElement('div');
             product_card.setAttribute("class", "product-card");
 

@@ -320,3 +320,124 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+const uploadedFiles = {};
+
+// Track image inputs
+const imageInputs = document.querySelectorAll('.preview-item input[type="file"]');
+imageInputs.forEach((input, index) => {
+    input.addEventListener('change', function () {
+        if (this.files && this.files.length > 0) {
+            uploadedFiles[`image${index + 1}`] = this.files[0];
+        }
+    });
+});
+
+// Validate and handle submit
+document.querySelector('.btn.btn-primary').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // ✅ Create FormData to send to PHP
+  const formData = new FormData();
+  const farmer_id = 22; // You’ll replace this with actual user ID later
+
+  // Collect values
+  const productName = document.getElementById('product-name').value.trim();
+  const category = document.getElementById('product-category').value;
+  const quantity = document.getElementById('product-quantity').value;
+  const quantityUnit = document.getElementById('quantity-unit').value;
+  const price = document.getElementById('product-price').value;
+  const priceUnit = document.getElementById('price-unit').textContent;
+  const description = document.getElementById('product-description').value.trim();
+  const promotionEnabled = document.getElementById('promotion-toggle').checked;
+
+  const availability = document.getElementById('availability-toggle').checked;
+  const availabilityStart = document.getElementById('availability-start')?.value;
+
+  // 🔍 Validation
+  let errors = [];
+
+  if (!productName) errors.push("Product name is required.");
+  if (!category) errors.push("Category is required.");
+  if (!quantity || isNaN(quantity) || Number(quantity) <= 0) errors.push("Quantity must be a positive number.");
+  if (!quantityUnit) errors.push("Quantity unit is required.");
+  if (!price || isNaN(price) || Number(price) <= 0) errors.push("Price must be a positive number.");
+  if (!priceUnit) errors.push("Price unit is missing.");
+  if (!description) errors.push("Description is required.");
+
+  if (Object.keys(uploadedFiles).length === 0) {
+      errors.push("At least one image must be uploaded.");
+  }
+
+  if (promotionEnabled) {
+      const promoName = document.getElementById('promotion-name').value.trim();
+      const promoCode = document.getElementById('promotion-code').value.trim();
+      const promoType = document.getElementById('promotion-type').value;
+      const promoValue = document.getElementById('promotion-value').value;
+      const promoStart = document.getElementById('promotion-start').value;
+      const promoEnd = document.getElementById('promotion-end').value;
+
+      if (!promoName || !promoCode || !promoType || !promoValue || !promoStart || !promoEnd) {
+          errors.push("All promotion fields must be filled in.");
+      }
+  }
+
+  // ❌ Show errors
+  if (errors.length > 0) {
+      alert("Please fix the following:\n\n" + errors.join("\n"));
+      return;
+  }
+
+  formData.append("farmer_id", farmer_id);
+  formData.append("productName", productName);
+  formData.append("category", category);
+  formData.append("quantity", quantity);
+  formData.append("quantityUnit", quantityUnit);
+  formData.append("price", price);
+  formData.append("priceUnit", priceUnit);
+  formData.append("description", description);
+  formData.append("availability", availability ? 1 : 0);
+  formData.append("availabilityStart", availability ? availabilityStart : "");
+
+  formData.append("promotionEnabled", promotionEnabled);
+  if (promotionEnabled) {
+    const promotionDetails = {
+      name: document.getElementById('promotion-name').value.trim(),
+      code: document.getElementById('promotion-code').value.trim(),
+      type: document.getElementById('promotion-type').value,
+      value: document.getElementById('promotion-value').value,
+      start: document.getElementById('promotion-start').value,
+      end: document.getElementById('promotion-end').value
+    };
+
+    formData.append("promotionName", promotionDetails.name);
+    formData.append("promotionCode", promotionDetails.code);
+    formData.append("promotionType", promotionDetails.type);
+    formData.append("promotionValue", promotionDetails.value);
+    formData.append("promotionStart", promotionDetails.start);
+    formData.append("promotionEnd", promotionDetails.end);
+  }
+
+  // Append multiple images under 'images[]'
+  Object.values(uploadedFiles).forEach(file => {
+      formData.append("images[]", file);
+  });
+
+  // Submit to PHP
+  fetch("http://localhost/AgriMarket/backend/products/add_product.php", {
+      method: "POST",
+      body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+      console.log(data);
+      if (data.success) {
+          alert("Product added!");
+      } else {
+          alert("Upload failed.");
+      }
+  })
+  .catch(err => {
+      console.error("Upload error", err);
+  });
+});
