@@ -6,6 +6,8 @@
     <title>Register | AgriMarket</title>
     <link rel="stylesheet" href="../../stylesheets/sign-up.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbmCF9VwsRKkk76dV9OZBvqNv7RciZcl0&libraries=places"></script>
+
 </head>
 <body>
     <div class="register-container">
@@ -429,6 +431,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+    function initAutocomplete() {
+        const input = document.getElementById('farm-location');
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+            types: ['geocode'], // or use ['establishment'] for businesses
+            componentRestrictions: { country: 'za' } // restrict to South Africa
+        });
+
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            console.log('Selected place:', place);
+            // You can extract lat/lng here if needed:
+            if (place.geometry) {
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+                console.log('Lat:', lat, 'Lng:', lng);
+            }
+        });
+    }
+
+    // Wait for the page to load before initializing
+    window.addEventListener('load', initAutocomplete);
+</script>
+
 
     <script src="../../scripts/sign-up.js"></script>
 </body>

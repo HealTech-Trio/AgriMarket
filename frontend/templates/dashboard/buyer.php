@@ -250,11 +250,15 @@
                         
                         <!-- Farmers Map -->
                         <div class="farmers-map">
-                            <div class="map-placeholder">
+                            <div class="map-placeholder" style="display: none;">
                                 <i class="fas fa-map-marked-alt"></i>
                                 <h3>Interactive Farmers Map</h3>
                                 <p>Farmers locations will be displayed here with markers</p>
                             </div>
+                            <!-- ✅ Map div with proper ID and height -->
+                            <div id="map" style="height: 400px; width: 100%; border-radius: 8px;"></div>
+                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -591,6 +595,111 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    let map;
+    let service;
+    let markers = [];
+    let userCircle;
+
+    function initAutocomplete() {
+        const input = document.getElementById('farm-location');
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+            types: ['geocode'],
+            componentRestrictions: { country: 'za' }
+        });
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -26.2041, lng: 28.0473 },
+            zoom: 14,
+        });
+
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            if (!place.geometry) return;
+
+            const location = {
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng(),
+            };
+
+            map.setCenter(location);
+            clearMarkers();
+            findNearbyFarms(location);
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const userLoc = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                map.setCenter(userLoc);
+
+                // Uber-style blue pulsing circle for user location
+                userCircle = new google.maps.Circle({
+                    strokeColor: "#1E90FF",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#1E90FF",
+                    fillOpacity: 0.35,
+                    map,
+                    center: userLoc,
+                    radius: 50, // meters
+                });
+
+                findNearbyFarms(userLoc);
+            });
+        }
+    }
+
+    function findNearbyFarms(location) {
+        const request = {
+            location: location,
+            radius: 5000,
+            keyword: "farmers market",
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                results.forEach(place => {
+                    const marker = new google.maps.Marker({
+                        map,
+                        position: place.geometry.location,
+                        title: place.name,
+                        icon: {
+                            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png", // Circular red marker
+                            scaledSize: new google.maps.Size(40, 40)
+                        }
+                    });
+
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<strong>${place.name}</strong><br>${place.vicinity || ''}`,
+                    });
+
+                    marker.addListener("click", () => {
+                        infoWindow.open(map, marker);
+                    });
+
+                    markers.push(marker);
+                });
+            }
+        });
+    }
+
+    function clearMarkers() {
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+    }
+
+    window.addEventListener('load', initAutocomplete);
+</script>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbmCF9VwsRKkk76dV9OZBvqNv7RciZcl0&libraries=places"></script>
 
     <script src="../../scripts/buyer.js"></script>
     <script src="../../scripts/farmers-near.js"></script>
