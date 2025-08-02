@@ -23,7 +23,7 @@
             <div class="sidebar-header">
                 <div class="profile">
                     <div class="profile-image">
-                        <img src="../../assets/images/divine.jpeg" alt="Farmer Profile">
+                        <img src="../../assets/images/divine.png" alt="Farmer Profile">
                     </div>
                     <div class="profile-info">
                         <h3 class="user-name">Divin</h3>
@@ -117,7 +117,7 @@
                         <div class="profile-dropdown">
                             <button class="dropdown-toggle">
                                 <div class="avatar">
-                                    <img src="../../assets/images/josh.jpg" alt="Profile">
+                                    <img src="../../assets/images/divine.png" alt="Profile">
                                 </div>
                                 <i class="fas fa-chevron-down"></i>
                             </button>
@@ -235,13 +235,14 @@
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <span>Upload New Product</span>
                             </a>
-                            <a href="#stock" class="action-card">
-                                <i class="fas fa-warehouse"></i>
-                                <span>Update Stock</span>
-                            </a>
+
                             <a href="#profile" class="action-card">
                                 <i class="fas fa-user-edit"></i>
                                 <span>Update Profile</span>
+                            </a>
+                            <a href="#stock" class="action-card">
+                                <i class="fas fa-robot"></i>
+                                <span>Agri Assistant</span>
                             </a>
                             <a href="#" class="action-card">
                                 <i class="fas fa-headset"></i>
@@ -917,7 +918,7 @@
                         <div class="profile-sidebar">
                             <div class="profile-card">
                                 <div class="profile-image">
-                                    <img src="../../assets/images/josh.jpg" alt="Profile">
+                                    <img src="../../assets/images/divine.png" alt="Profile">
                                     <button class="edit-avatar"><i class="fas fa-camera"></i></button>
                                 </div>
                                 <h3 class="user-name">Divin</h3>

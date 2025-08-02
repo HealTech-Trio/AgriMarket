@@ -407,7 +407,25 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
+.stat-card {
+    border-left: 6px solid transparent;
+}
 
+.stat-card.stat1 {
+    border-left-color: var(--primary-color);
+}
+
+.stat-card.stat2 {
+    border-left-color: var(--warning-color); 
+}
+
+.stat-card.stat3 {
+    border-left-color: var(--success-color); 
+}
+
+.stat-card.stat4 {
+    border-left-color: var(--info-color); 
+}
 .stat-icon {
   width: 60px;
   height: 60px;

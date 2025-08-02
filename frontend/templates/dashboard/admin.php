@@ -110,7 +110,7 @@
             <header class="admin-header">
                 <div class="header-left">
                     <h1>Admin Dashboard</h1>
-                    <p>Welcome back, <span class="admin-name">Admin User</span></p>
+                    <p>Welcome back, <span class="admin-name">Lutho</span></p>
                 </div>
                 
                 <div class="header-right">
@@ -127,10 +127,10 @@
                         
                         <div class="admin-profile">
                             <div class="avatar">
-                                <img src="../../assets/images/admin.jpg" alt="Admin">
+                                <img src="../../assets/images/lutho.png" alt="Admin">
                             </div>
                             <div class="profile-dropdown">
-                                <span>Admin User</span>
+                                <span>Lutho Buyaphi</span>
                                 <i class="fas fa-chevron-down"></i>
                                 <div class="dropdown-menu">
                                     <a href="#"><i class="fas fa-user"></i> My Profile</a>
@@ -149,7 +149,7 @@
                 <!-- Dashboard Overview -->
                 <section class="content-section active" id="dashboard-content">
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card stat1">
                             <div class="stat-icon">
                                 <i class="fas fa-users"></i>
                             </div>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat2">
                             <div class="stat-icon">
                                 <i class="fas fa-user-tie"></i>
                             </div>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat3">
                             <div class="stat-icon">
                                 <i class="fas fa-box-open"></i>
                             </div>
@@ -182,7 +182,7 @@
                             </div>
                         </div>
                         
-                        <div class="stat-card">
+                        <div class="stat-card stat4">
                             <div class="stat-icon">
                                 <i class="fas fa-exchange-alt"></i>
                             </div>
