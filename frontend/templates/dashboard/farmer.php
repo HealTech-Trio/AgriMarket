@@ -23,10 +23,10 @@
             <div class="sidebar-header">
                 <div class="profile">
                     <div class="profile-image">
-                        <img src="../../assets/images/josh.jpg" alt="Farmer Profile">
+                        <img src="../../assets/images/divine.jpeg" alt="Farmer Profile">
                     </div>
                     <div class="profile-info">
-                        <h3 class="user-name">User</h3>
+                        <h3 class="user-name">Divin</h3>
                         <p>Farmer Account</p>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
             <!-- Fixed Header -->
             <header class="main-header">
                 <div class="header-left">
-                    <h1>Welcome back, <span class="user-name">User</span></h1>
+                    <h1>Welcome back, <span class="user-name">Divin</span></h1>
                     <p>Here's what's happening with your farm today</p>
                 </div>
                 
@@ -920,7 +920,7 @@
                                     <img src="../../assets/images/josh.jpg" alt="Profile">
                                     <button class="edit-avatar"><i class="fas fa-camera"></i></button>
                                 </div>
-                                <h3 class="user-name">User</h3>
+                                <h3 class="user-name">Divin</h3>
                                 <p>Farmer Account</p>
                                 <div class="profile-stats">
                                     <div class="stat-item">
@@ -951,7 +951,7 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="first-name">First Name</label>
-                                            <input type="text" id="first-name" value="Thando">
+                                            <input type="text" id="first-name" value="Divin">
                                         </div>
                                         <div class="form-group">
                                             <label for="last-name">Last Name</label>
@@ -961,7 +961,7 @@
                                     
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" id="email" value="thando@example.com">
+                                        <input type="email" id="email" value="divindaniel58@gmail@gmail.com">
                                     </div>
                                     
                                     <div class="form-group">
@@ -1050,7 +1050,7 @@
                                     
                                     <div class="form-group">
                                         <label for="account-name">Account Name</label>
-                                        <input type="text" id="account-name" value="Thando Nkosi">
+                                        <input type="text" id="account-name" value="Divin Mathem's">
                                     </div>
                                     
                                     <div class="form-group">
