@@ -391,8 +391,151 @@
                 </div>
                 
                 <!-- Product Grid -->
-                <div class="product-grid compact-view">
-                    
+                <!-- <div class="product-grid compact-view"> -->
+                                <!-- Product Grid -->
+            <section class="product-grid">
+                <div class="grid-header">
+                    <h2>Fresh Produce from Local Farmers</h2>
+                    <div class="sort-options">
+                        <select>
+                            <option>Sort by: Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://insanelygoodrecipes.com/wp-content/uploads/2022/09/Fresh-Red-Apples-Ready-to-Eat-800x530.jpg" alt="Fresh Apples">
+                            <span class="stock-badge">In Stock: 150kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Red Apples</h3>
+                            <div class="price">R 65 / 10kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Farm Fresh Co.</div>
+                                <div class="supplier-location">Western Cape</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://thumbs.dreamstime.com/b/view-fresh-tomatoes-different-shapes-tomato-shapes-173362970.jpg" alt="Organic Tomatoes">
+                            <span class="stock-badge">In Stock: 80kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Organic Tomatoes</h3>
+                            <div class="price">R 45 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Green Valley Farms</div>
+                                <div class="supplier-location">Gauteng</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://th.bing.com/th/id/R.2a211c11dab40396b01d0129693c27d6?rik=YQM%2fl2ZuC0I3ug&pid=ImgRaw&r=0" alt="Sweet Corn">
+                            <span class="stock-badge">In Stock: 200kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Sweet Corn</h3>
+                            <div class="price">R 30 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Sunshine Farms</div>
+                                <div class="supplier-location">KwaZulu-Natal</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.TpObdWh6guNQhi4Rldc5YwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fresh Potatoes">
+                            <span class="stock-badge">In Stock: 300kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Potatoes</h3>
+                            <div class="price">R 50 / 10kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Mountain View Produce</div>
+                                <div class="supplier-location">Eastern Cape</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 5 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.cc1fmrVHT-YDXEVia6rsUwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Carrots">
+                            <span class="stock-badge">In Stock: 120kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Carrots</h3>
+                            <div class="price">R 40 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Riverbend Farms</div>
+                                <div class="supplier-location">Free State</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 6 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.VtUhSp-QUNbW2daMC1JWYQHaF3?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Avocados">
+                            <span class="stock-badge">In Stock: 75kg</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Hass Avocados</h3>
+                            <div class="price">R 90 / 5kg</div>
+                            <div class="supplier-info">
+                                <div class="supplier-name">Tropical Delights</div>
+                                <div class="supplier-location">Limpopo</div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="contact-btn">Contact Supplier</button>
+                                <button class="order-btn">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">&raquo;</a>
+                </div> -->
+            </section>
                 </div>
                 
                 <!-- Pagination -->
