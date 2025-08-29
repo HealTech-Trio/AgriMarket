@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="../../stylesheets/buyer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+    <script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAszkhbYTc0Oq7VgpgtMeAMSJEyr9JXaS4&libraries=places,geometry&callback=initMap">
+</script>
+
+
 </head>
 <body>
     <!-- Buyer Dashboard Header -->
@@ -108,8 +113,8 @@
                     <!-- Fixed Search and Sort Bar -->
                     <div class="farmers-search-sort">
                         <div class="farmers-search">
-                            <input type="text" placeholder="Search farmers by name or location...">
-                            <button><i class="fas fa-search"></i></button>
+                            <input id="searchInput" type="text" placeholder="Search farmers by name or location...">
+                            <button id="searchBtn"><i class="fas fa-search"></i></button>
                         </div>
                         <div class="farmers-sort">
                             <span>Sort by:</span>
@@ -249,13 +254,10 @@
                         </aside>
                         
                         <!-- Farmers Map -->
-                        <div class="farmers-map">
-                            <div class="map-placeholder">
-                                <i class="fas fa-map-marked-alt"></i>
-                                <h3>Interactive Farmers Map</h3>
-                                <p>Farmers locations will be displayed here with markers</p>
+                           <div class="farmers-map">
+                                <div id="map"></div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -734,6 +736,141 @@
             </div>
         </div>
     </footer>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+        }
+    </style>
+
+   <script>
+    let map, userMarker, autocomplete, placesService;
+
+// URL for the custom red map pin icon, similar to Google's
+const farmIconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+
+function initMap() {
+    // Initialize map centered on Johannesburg
+    const jhb = { lat: -26.2041, lng: 28.0473 };
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: jhb,
+        zoom: 10,
+    });
+
+    // Initialize the Places Service
+    placesService = new google.maps.places.PlacesService(map);
+
+    // Try HTML5 geolocation to get the user's current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                map.setCenter(pos);
+                map.setZoom(12);
+
+                // Add a marker for the user's location (blue dot)
+                userMarker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    title: "Your Location",
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: "#4285F4",
+                        fillOpacity: 1,
+                        strokeWeight: 2,
+                        strokeColor: "white",
+                    }
+                });
+                
+                // Search for farms near the user's location
+                findNearbyFarms(pos);
+            },
+            () => {
+                alert("Geolocation failed. Showing farms around Johannesburg.");
+                findNearbyFarms(jhb);
+            }
+        );
+    } else {
+        alert("Your browser doesn't support geolocation. Showing farms around Johannesburg.");
+        findNearbyFarms(jhb);
+    }
+
+    // --- Autocomplete code remains the same ---
+    const input = document.getElementById("searchInput");
+    autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo("bounds", map);
+
+    autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+            alert("No details available for input: '" + place.name + "'");
+            return;
+        }
+
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(12);
+        }
+        
+        findNearbyFarms(place.geometry.location);
+    });
+}
+
+/**
+ * Searches for farms and groceries near a given location.
+ */
+function findNearbyFarms(location) {
+    const request = {
+        location: location,
+        radius: '15000', // 15km radius
+        keyword: ['farm', 'farmers market', 'fresh produce', 'farm supply', 'farm grocery']
+    };
+
+    placesService.nearbySearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            results.forEach(place => createFarmMarker(place));
+        } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            alert("No farms or farm groceries found in this area.");
+        }
+    });
+}
+
+/**
+ * Creates a custom red marker on the map for a given place.
+ */
+function createFarmMarker(place) {
+    if (!place.geometry || !place.geometry.location) return;
+
+    // Create a new marker with the custom red icon
+    const marker = new google.maps.Marker({
+        map,
+        position: place.geometry.location,
+        title: place.name,
+        icon: {
+            url: farmIconUrl, // Using the red dot icon
+            scaledSize: new google.maps.Size(40, 40) // Adjust size if needed
+        }
+    });
+
+    // InfoWindow to show details on click
+    const infowindow = new google.maps.InfoWindow({
+        content: `<div><strong>${place.name}</strong><br>Rating: ${place.rating || 'N/A'}<br>${place.vicinity}</div>`
+    });
+
+    marker.addListener("click", () => {
+        infowindow.open(map, marker);
+    });
+}
+  </script>
 
     <script src="../../scripts/buyer.js"></script>
     <script src="../../scripts/farmers-near.js"></script>
