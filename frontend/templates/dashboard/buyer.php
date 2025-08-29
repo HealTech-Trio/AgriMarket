@@ -744,133 +744,200 @@
             border-radius: 10px;
         }
     </style>
+<script>
+  let map, userMarker, autocomplete, placesService;
 
-   <script>
-    let map, userMarker, autocomplete, placesService;
+  // Emoji sets by category
+  const emojiMap = {
+    farm: ["🌾", "🐄", "🐓", "🍇"],
+    market: ["🥕", "🌱", "🛒"],
+    grocery: ["🛒", "🥕"],
+    default: ["🛒", "🌾", "🥕", "🐄"]
+  };
 
-// URL for the custom red map pin icon, similar to Google's
-const farmIconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  function getEmojiForPlace(place) {
+    const name = place.name.toLowerCase();
 
-function initMap() {
-    // Initialize map centered on Johannesburg
+    if (name.includes("farm")) return randomEmoji(emojiMap.farm);
+    if (name.includes("market")) return randomEmoji(emojiMap.market);
+    if (name.includes("grocery") || name.includes("shop") || name.includes("store"))
+      return randomEmoji(emojiMap.grocery);
+
+    return randomEmoji(emojiMap.default);
+  }
+
+  function randomEmoji(list) {
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  // Custom SVG Circle Icon with Emoji
+  function getFarmIcon(place) {
+    const emoji = getEmojiForPlace(place);
+
+    return {
+      url:
+        "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" fill="red" stroke="white" stroke-width="3"/>
+            <text x="50%" y="55%" text-anchor="middle" font-size="18" font-family="Arial" fill="white">${emoji}</text>
+          </svg>
+        `),
+      scaledSize: new google.maps.Size(40, 40),
+      anchor: new google.maps.Point(20, 20) // center the circle
+    };
+  }
+
+  function initMap() {
     const jhb = { lat: -26.2041, lng: 28.0473 };
     map = new google.maps.Map(document.getElementById("map"), {
-        center: jhb,
-        zoom: 10,
+      center: jhb,
+      zoom: 10,
     });
 
-    // Initialize the Places Service
     placesService = new google.maps.places.PlacesService(map);
 
-    // Try HTML5 geolocation to get the user's current location
+    // Get user location
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                };
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
 
-                map.setCenter(pos);
-                map.setZoom(12);
+          map.setCenter(pos);
+          map.setZoom(12);
 
-                // Add a marker for the user's location (blue dot)
-                userMarker = new google.maps.Marker({
-                    position: pos,
-                    map: map,
-                    title: "Your Location",
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 8,
-                        fillColor: "#4285F4",
-                        fillOpacity: 1,
-                        strokeWeight: 2,
-                        strokeColor: "white",
-                    }
-                });
-                
-                // Search for farms near the user's location
-                findNearbyFarms(pos);
+          // User blue circle marker
+          userMarker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: "Your Location",
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 8,
+              fillColor: "#4285F4",
+              fillOpacity: 1,
+              strokeWeight: 2,
+              strokeColor: "white",
             },
-            () => {
-                alert("Geolocation failed. Showing farms around Johannesburg.");
-                findNearbyFarms(jhb);
-            }
-        );
+          });
+
+          findNearbyFarms(pos);
+        },
+        () => {
+          alert("Geolocation failed. Showing farms around Johannesburg.");
+          findNearbyFarms(jhb);
+        }
+      );
     } else {
-        alert("Your browser doesn't support geolocation. Showing farms around Johannesburg.");
-        findNearbyFarms(jhb);
+      alert("Your browser doesn't support geolocation. Showing farms around Johannesburg.");
+      findNearbyFarms(jhb);
     }
 
-    // --- Autocomplete code remains the same ---
+    // Autocomplete search
     const input = document.getElementById("searchInput");
     autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo("bounds", map);
 
     autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-            alert("No details available for input: '" + place.name + "'");
-            return;
-        }
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        alert("No details available for input: '" + place.name + "'");
+        return;
+      }
 
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(12);
-        }
-        
-        findNearbyFarms(place.geometry.location);
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(12);
+      }
+
+      findNearbyFarms(place.geometry.location);
     });
-}
+  }
 
-/**
- * Searches for farms and groceries near a given location.
- */
-function findNearbyFarms(location) {
+  function findNearbyFarms(location) {
     const request = {
-        location: location,
-        radius: '15000', // 15km radius
-        keyword: ['farm', 'farmers market', 'fresh produce', 'farm supply', 'farm grocery']
+      location: location,
+      radius: 20000, // 20km
+      keyword: "farm OR farmers market OR fresh produce OR grocery",
     };
 
     placesService.nearbySearch(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-            results.forEach(place => createFarmMarker(place));
-        } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-            alert("No farms or farm groceries found in this area.");
-        }
-    });
-}
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        results.forEach((place) => {
+          if (place.place_id) {
+            const detailsRequest = {
+              placeId: place.place_id,
+              fields: [
+                "name",
+                "rating",
+                "vicinity",
+                "opening_hours",
+                "geometry",
+                "url",
+              ],
+            };
 
-/**
- * Creates a custom red marker on the map for a given place.
- */
-function createFarmMarker(place) {
+            placesService.getDetails(
+              detailsRequest,
+              (detailedPlace, detailStatus) => {
+                if (
+                  detailStatus === google.maps.places.PlacesServiceStatus.OK &&
+                  detailedPlace
+                ) {
+                  createFarmMarker(detailedPlace);
+                }
+              }
+            );
+          }
+        });
+      }
+    });
+  }
+
+  function createFarmMarker(place) {
     if (!place.geometry || !place.geometry.location) return;
 
-    // Create a new marker with the custom red icon
     const marker = new google.maps.Marker({
-        map,
-        position: place.geometry.location,
-        title: place.name,
-        icon: {
-            url: farmIconUrl, // Using the red dot icon
-            scaledSize: new google.maps.Size(40, 40) // Adjust size if needed
-        }
+      map,
+      position: place.geometry.location,
+      title: place.name,
+      icon: getFarmIcon(place), // ⭕ with emoji inside
     });
 
-    // InfoWindow to show details on click
+    let hoursInfo = "Opening hours not available";
+    if (place.opening_hours) {
+      hoursInfo = place.opening_hours.isOpen()
+        ? '<span style="color: green;">Open now</span>'
+        : '<span style="color: red;">Closed</span>';
+    }
+
+    const contentString = `
+      <div style="font-family: Arial, sans-serif; max-width: 250px;">
+          <h3 style="margin: 0 0 5px 0;">${place.name}</h3>
+          <p style="margin: 0;">${place.rating || "No rating"} ★ | ${
+      place.vicinity
+    }</p>
+          <p style="margin: 5px 0;">${hoursInfo}</p>
+          <a href="${
+            place.url
+          }" target="_blank">View on Google Maps & Get Directions</a>
+      </div>`;
+
     const infowindow = new google.maps.InfoWindow({
-        content: `<div><strong>${place.name}</strong><br>Rating: ${place.rating || 'N/A'}<br>${place.vicinity}</div>`
+      content: contentString,
     });
 
     marker.addListener("click", () => {
-        infowindow.open(map, marker);
+      infowindow.open(map, marker);
     });
-}
-  </script>
+  }
+</script>
+
 
     <script src="../../scripts/buyer.js"></script>
     <script src="../../scripts/farmers-near.js"></script>
