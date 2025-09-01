@@ -1,11 +1,13 @@
-<?php 
-/*
- * Buyer Dashboard - UI Mockup
- * File: buyer.php
- * Description: Buyer dashboard interface for authenticated users
+<?php
+    require_once __DIR__ . '/../../../backend/vendor/autoload.php'; // Adjust path as needed
 
- */
-?> 
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+    $dotenv->load();
+
+    $googleMapsApiKey = $_ENV['GOOGLE_MAPS_API_KEY'];
+
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAszkhbYTc0Oq7VgpgtMeAMSJEyr9JXaS4&libraries=places,geometry&callback=initMap">
-</script>
+    src="https://maps.googleapis.com/maps/api/js?key=<?php echo htmlspecialchars($googleMapsApiKey); ?>&libraries=places,geometry&callback=initMap">
+    </script>
 
 
 </head>

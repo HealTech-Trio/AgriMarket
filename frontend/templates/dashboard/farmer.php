@@ -240,11 +240,11 @@
                                 <i class="fas fa-user-edit"></i>
                                 <span>Update Profile</span>
                             </a>
-                            <a href="#stock" class="action-card">
+                            <a href="#agri-Assistant" class="action-card">
                                 <i class="fas fa-robot"></i>
                                 <span>Agri Assistant</span>
                             </a>
-                            <a href="#" class="action-card">
+                            <a href="#support" class="action-card">
                                 <i class="fas fa-headset"></i>
                                 <span>Contact Support</span>
                             </a>
@@ -437,7 +437,7 @@
                     <div class="products-grid">
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="../../assets/images/product1.jpg" alt="Organic Tomatoes">
+                            <img src="https://thumbs.dreamstime.com/b/view-fresh-tomatoes-different-shapes-tomato-shapes-173362970.jpg" alt="Organic Tomatoes">
                                 <div class="product-status in-stock">In Stock</div>
                             </div>
                             <div class="product-info">
