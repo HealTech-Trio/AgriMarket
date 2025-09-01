@@ -178,6 +178,29 @@
                         </div>
                     </div>
                     
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="actions-grid">
+                            <a href="#upload" class="action-card">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Upload New Product</span>
+                            </a>
+
+                            <a href="#profile" class="action-card">
+                                <i class="fas fa-user-edit"></i>
+                                <span>Update Profile</span>
+                            </a>
+                            <a href="#agri-Assistant" class="action-card" id="assistant">
+                                <i class="fas fa-robot"></i>
+                                <span>Agri Assistant</span>
+                            </a>
+                            <a href="#support" class="action-card" id="supportTeam">
+                                <i class="fas fa-headset"></i>
+                                <span>Contact Support</span>
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="content-row">
                         <div class="chart-card">
                             <div class="card-header">
@@ -228,28 +251,6 @@
                         </div>
                     </div>
                     
-                    <div class="quick-actions">
-                        <h3>Quick Actions</h3>
-                        <div class="actions-grid">
-                            <a href="#upload" class="action-card">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Upload New Product</span>
-                            </a>
-
-                            <a href="#profile" class="action-card">
-                                <i class="fas fa-user-edit"></i>
-                                <span>Update Profile</span>
-                            </a>
-                            <a href="#agri-Assistant" class="action-card">
-                                <i class="fas fa-robot"></i>
-                                <span>Agri Assistant</span>
-                            </a>
-                            <a href="#support" class="action-card">
-                                <i class="fas fa-headset"></i>
-                                <span>Contact Support</span>
-                            </a>
-                        </div>
-                    </div>
                 </section>
                 
                 <!-- Upload Product Section -->
@@ -1108,6 +1109,256 @@
                 </section>
             </div>
         </main>
+    </div>
+
+    <!-- AgriAssistant Modal -->
+    <div id="agriAssistantModal" class="agri-modal">
+        <div class="agri-modal-backdrop">
+            <div class="floating-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+        
+        <div class="agri-modal-container">
+            <div class="agri-modal-header">
+                <div class="modal-header-content">
+                    <div class="ai-avatar">
+                        <div class="ai-pulse"></div>
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="header-text">
+                        <h2>AgriAssistant AI</h2>
+                        <p>Your intelligent farming companion</p>
+                    </div>
+                </div>
+                <button class="agri-modal-close" id="closeAgriModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="agri-modal-body">
+                <!-- AI Features Grid -->
+                <div class="ai-features-grid">
+
+                    <div class="ai-feature-card smart-chat" data-feature="smart-chat">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Smart Chat</h3>
+                            <p>Conversational AI for farming questions and guidance</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-feature-card crop-analysis" data-feature="crop-analysis">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Crop Analysis</h3>
+                            <p>AI-powered crop health monitoring and disease detection</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="ai-feature-card market-trends" data-feature="market-trends">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Market Trends</h3>
+                            <p>Real-time market analysis and price predictions</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="ai-feature-card weather-insights" data-feature="weather-insights">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Weather Insights</h3>
+                            <p>Smart weather predictions and farming recommendations</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-feature-card yield-prediction" data-feature="yield-prediction">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Yield Prediction</h3>
+                            <p>Advanced analytics for harvest forecasting</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card resource-optimizer" data-feature="resource-optimizer">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Resource Optimizer</h3>
+                            <p>Optimize water, fertilizer, and energy usage</p>
+                            <div class="feature-status">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="ai-quick-actions">
+                    <h3>Quick AI Actions</h3>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn analyze-photos">
+                            <i class="fas fa-camera"></i>
+                            <span>Analyze Crop Photos</span>
+                        </button>
+                        <button class="quick-action-btn weather-forecast">
+                            <i class="fas fa-cloud"></i>
+                            <span>7-Day Forecast</span>
+                        </button>
+                        <button class="quick-action-btn price-check">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Price Check</span>
+                        </button>
+                        <button class="quick-action-btn ask-ai">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Ask AI Anything</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Recommendations Panel -->
+                <div class="ai-recommendations">
+                    <h3>Today's AI Recommendations</h3>
+                    <div class="recommendations-list">
+                        <div class="recommendation-item priority-high">
+                            <div class="rec-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h4>Weather Alert</h4>
+                                <p>Heavy rainfall expected in 3 days. Consider harvesting tomatoes early.</p>
+                                <span class="rec-confidence">95% confidence</span>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item priority-medium">
+                            <div class="rec-icon">
+                                <i class="fas fa-chart-up"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h4>Market Opportunity</h4>
+                                <p>Tomato prices increasing by 15% this week. Good time to list premium stock.</p>
+                                <span class="rec-confidence">87% confidence</span>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item priority-low">
+                            <div class="rec-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h4>Crop Care</h4>
+                                <p>Apple trees showing optimal growth. Consider light pruning next week.</p>
+                                <span class="rec-confidence">78% confidence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            
+            <div class="agri-modal-footer">
+                <div class="ai-status">
+                    <div class="status-indicator">
+                        <div class="pulse-dot"></div>
+                        <span>AI Systems Online</span>
+                    </div>
+                    <div class="last-update">
+                        Last updated: 2 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Interface Modal (Sub-modal for Smart Chat) -->
+    <div id="aiChatModal" class="ai-chat-modal">
+        <div class="chat-modal-container">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat-title">
+                    <h3>AgriAssistant Chat</h3>
+                    <p>Ask me anything about farming</p>
+                </div>
+                <button class="chat-close" id="closeChatModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello Divin! I'm your AgriAssistant AI. I can help you with crop management, weather insights, market trends, and any farming questions you have. How can I assist you today?</p>
+                        <span class="message-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-suggestions">
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip">What's the best time to plant tomatoes?</button>
+                    <button class="suggestion-chip">Check my crop health</button>
+                    <button class="suggestion-chip">Market prices for apples</button>
+                    <button class="suggestion-chip">Weather forecast for next week</button>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <input type="text" placeholder="Type your farming question..." id="chatInput">
+                    <button class="send-button" id="sendMessage">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../../scripts/farmer.js"></script>
