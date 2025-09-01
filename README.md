@@ -98,3 +98,4 @@ We are building a **simple, mobile-friendly web platform** that connects local f
 ## 🤝 Contributing
 
 *Add contribution guidelines here*
+ 

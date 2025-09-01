@@ -3,4 +3,4 @@
 
 composer require vlucas/phpdotenv
 composer require google/apiclient
-composer require phpmailer/phpmailer vlucas/phpdotenv
+composer require phpmailer/phpmailer vlucas/phpdotenv 

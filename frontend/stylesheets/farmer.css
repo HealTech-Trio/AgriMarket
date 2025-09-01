@@ -2100,7 +2100,7 @@ body, .dashboard-container, .main-content {
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    background: linear-gradient(135deg, #596270 0%, var(--sidebar-bg) 100%);
     color: white;
 }
 
@@ -2204,12 +2204,13 @@ body, .dashboard-container, .main-content {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .ai-feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.1875rem);
+    box-shadow: lightskyblue 0px 0px 5px;
+    border-color: #4895ef;
 }
 
 .feature-icon {
@@ -2228,11 +2229,11 @@ body, .dashboard-container, .main-content {
 .market-trends .feature-icon { background: linear-gradient(135deg, #FF9800, #FFEB3B); }
 .smart-chat .feature-icon { background: linear-gradient(135deg, #9C27B0, #673AB7); }
 .yield-prediction .feature-icon { background: linear-gradient(135deg, #F44336, #E91E63); }
-.resource-optimizer .feature-icon { background: linear-gradient(135deg, #00BCD4, #009688); }
+.products-sales-overview .feature-icon { background: linear-gradient(135deg, #1e90ff, #43e97b); }
 
 .feature-content h3 {
     margin: 0 0 8px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .feature-content p {
@@ -3350,3 +3351,34 @@ body, .dashboard-container, .main-content {
         padding: 12px 15px;
     }
 }
+
+.premium-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.65em;
+    padding: 0.25em 0.85em 0.25em 0.7em;
+    border-radius: 1.2em;
+    margin-left: 0.7em;
+    box-shadow: 0 2px 8px rgba(253,160,133,0.10);
+    letter-spacing: 0.03em;
+    position: relative;
+    vertical-align: middle;
+    transition: box-shadow 0.2s;
+}
+.premium-badge i.fa-crown {
+    margin-right: 0.45em;
+    color: #fffbe7;
+    font-size: 1.1em;
+    filter: drop-shadow(0 1px 2px rgba(246,211,101,0.25));
+}
+.premium-badge:hover, .premium-badge:focus {
+    box-shadow: 0 4px 16px rgba(253,160,133,0.18);
+    text-decoration: none;
+}
+/* .products-sales-overview .feature-icon {
+    background: linear-gradient(135deg, #1e90ff, #43e97b);
+    color: #fff;
+} */

@@ -1134,7 +1134,11 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="header-text">
-                        <h2>AgriAssistant AI</h2>
+                        <h2>AgriAssistant AI
+                            <!-- <span class="premium-badge" title="Pro Version">
+                                <i class="fas fa-crown"></i> Premium
+                            </span> -->
+                        </h2>
                         <p>Your intelligent farming companion</p>
                     </div>
                 </div>
@@ -1181,7 +1185,11 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Market Trends</h3>
+                            <h3>Market Trends
+                                <span class="premium-badge" title="Pro Version">
+                                    <i class="fas fa-crown"></i> Pro
+                                </span>
+                            </h3>
                             <p>Real-time market analysis and price predictions</p>
                             <div class="feature-status">
                                 <span class="status-dot active"></span>
@@ -1190,28 +1198,34 @@
                         </div>
                     </div>
                     
-
-                    
-                    <div class="ai-feature-card weather-insights" data-feature="weather-insights">
+                    <div class="ai-feature-card products-sales-overview" data-feature="products-sales-overview">
                         <div class="feature-icon">
-                            <i class="fas fa-cloud-sun"></i>
+                            <i class="fas fa-sticky-note"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Weather Insights</h3>
-                            <p>Smart weather predictions and farming recommendations</p>
+                            <h3>Products & Sales Overview
+                                <span class="premium-badge" title="Pro Version">
+                                    <i class="fas fa-crown"></i> Pro
+                                </span>
+                            </h3>
+                            <p>Analyze product trends, review past sales, and get AI-driven selling advice</p>
                             <div class="feature-status">
                                 <span class="status-dot active"></span>
                                 <span>Active</span>
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="ai-feature-card yield-prediction" data-feature="yield-prediction">
                         <div class="feature-icon">
                             <i class="fas fa-calculator"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Yield Prediction</h3>
+                            <h3>Yield Prediction
+                                <span class="premium-badge" title="Pro Version">
+                                    <i class="fas fa-crown"></i> Pro
+                                </span>
+                            </h3>
                             <p>Advanced analytics for harvest forecasting</p>
                             <div class="feature-status">
                                 <span class="status-dot active"></span>
@@ -1220,13 +1234,14 @@
                         </div>
                     </div>
                     
-                    <div class="ai-feature-card resource-optimizer" data-feature="resource-optimizer">
+                    <div class="ai-feature-card weather-insights" data-feature="weather-insights">
                         <div class="feature-icon">
-                            <i class="fas fa-cogs"></i>
+                            <i class="fas fa-cloud-sun"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Resource Optimizer</h3>
-                            <p>Optimize water, fertilizer, and energy usage</p>
+                            <h3>Weather Insights
+                            </h3>
+                            <p>Smart weather predictions and farming recommendations</p>
                             <div class="feature-status">
                                 <span class="status-dot active"></span>
                                 <span>Active</span>
