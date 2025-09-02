@@ -2455,7 +2455,7 @@ body, .dashboard-container, .main-content {
 
 .chat-modal-container {
     width: 90%;
-    max-width: 500px;
+    max-width: 800px;
     background: white;
     border-radius: 15px;
     overflow: hidden;
@@ -2605,6 +2605,8 @@ body, .dashboard-container, .main-content {
 .chat-input-container {
     padding: 15px 20px;
     border-top: 1px solid #e9ecef;
+    /* max-width: 400px;
+    align-items: center; */
 }
 
 .chat-input {
@@ -3070,7 +3072,7 @@ body, .dashboard-container, .main-content {
     align-self: flex-start;
 }
 
-.message.user {
+.message.user-message, .message.user {
     align-self: flex-end;
     flex-direction: row-reverse;
 }

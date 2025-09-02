@@ -1356,14 +1356,14 @@
                 </div>
             </div>
             
-            <div class="chat-suggestions">
+            <!-- <div class="chat-suggestions">
                 <div class="suggestion-chips">
                     <button class="suggestion-chip">What's the best time to plant tomatoes?</button>
                     <button class="suggestion-chip">Check my crop health</button>
                     <button class="suggestion-chip">Market prices for apples</button>
                     <button class="suggestion-chip">Weather forecast for next week</button>
                 </div>
-            </div>
+            </div> -->
             
             <div class="chat-input-container">
                 <div class="chat-input">
@@ -1377,5 +1377,7 @@
     </div>
 
     <script src="../../scripts/farmer.js"></script>
+    <script src="../../scripts/chatbot.js"></script>
+
 </body>
 </html>

@@ -102,7 +102,7 @@ function initReportsCharts() {
         data: {
             labels: ['Vegetables', 'Fruits', 'Dairy', 'Grains', 'Meat'],
             datasets: [{
-                data: [35, 25, 20, 12, 8],
+            data: [120000, 95000, 80000, 60000, 40000],
                 backgroundColor: [
                     '#2e7d32',
                     '#4caf50',
@@ -240,9 +240,7 @@ function getChartOptions(title, isBarChart = false, isDoughnut = false, isHorizo
         baseOptions.plugins.tooltip.callbacks.label = function(context) {
             const label = context.label || '';
             const value = context.raw;
-            const total = context.dataset.data.reduce((acc, data) => acc + data, 0);
-            const percentage = Math.round((value / total) * 100);
-            return `${label}: ${value} (${percentage}%)`;
+            return `R${label}: ${value}`;
         };
     }
 

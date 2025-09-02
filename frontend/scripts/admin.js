@@ -66,10 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const quarters = ['Q1', 'Q2', 'Q3', 'Q4'];
 
   // Data for each metric (normalized for comparison)
-  const userGrowthData = [1250, 1350, 1420, 1548];
+  const userGrowthData = [12050, 13500, 14200, 15408];
   const VerifiedFarmersData = [18500, 21000, 19500, 23400];
-  const ActiveProductsData = [35, 25, 20, 12]; // Using % values
-  const TotalTransactionsData = [35, 28, 22, 10]; // Using % values
+  // Use higher values for better chart balance:
+  const ActiveProductsData = [12000, 15000, 17000, 20000];
+  const TotalTransactionsData = [18500, 21000, 19500, 23400];
 
   // Create the chart with initial data (Quarterly view)
   const chart = new Chart(ctx, {
@@ -140,11 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
                               label += ': ';
                           }
                           if (context.parsed.y !== null) {
-                              if (['User Growth', 'Verified Farmers'].includes(context.dataset.label)) {
-                                  label += new Intl.NumberFormat().format(context.parsed.y);
-                              } else {
-                                  label += context.parsed.y + '%';
-                              }
+                              label += new Intl.NumberFormat().format(context.parsed.y);
                           }
                           return label;
                       }
@@ -208,47 +205,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Function to update chart data based on selected time filter
   function updateChartData(timeFrame) {
-      let labels, userData, FarmersData, ProductsData, TotalData;
-      
-      switch(timeFrame) {
-          case 'Month':
-              labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-              userData = [1200, 1250, 1300, 1350, 1400, 1450];
-              FarmersData = [18000, 18500, 19000, 19500, 20000, 20500];
-              ProductsData = [30, 28, 32, 35, 33, 34];
-              TotalData = [30, 32, 31, 35, 34, 33];
-              break;
-          case 'Quarter':
-              labels = ['Q1', 'Q2', 'Q3', 'Q4'];
-              userData = [1250, 1350, 1420, 1548];
-              FarmersData = [18500, 21000, 19500, 23400];
-              ProductsData = [35, 25, 20, 12];
-              TotalData = [35, 28, 22, 10];
-              break;
-          case 'Year':
-              labels = ['2020', '2021', '2022', '2023'];
-              userData = [1000, 1250, 1420, 1548];
-              FarmersData = [15000, 18500, 21000, 23400];
-              ProductsData = [25, 30, 32, 35];
-              TotalData = [25, 30, 32, 35];
-              break;
-          default: // Week
-              labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-              userData = [1200, 1250, 1300, 1350];
-              FarmersData = [18000, 18500, 19000, 19500];
-              ProductsData = [30, 32, 34, 35];
-              TotalData = [30, 32, 33, 35];
-      }
-      
-      // Update chart data
-      chart.data.labels = labels;
-      chart.data.datasets[0].data = userData;
-      chart.data.datasets[1].data = FarmersData;
-      chart.data.datasets[2].data = ProductsData;
-      chart.data.datasets[3].data = TotalData;
-      
-      // Update chart
-      chart.update();
+    let labels, userData, FarmersData, ProductsData, TotalData;
+    
+    switch(timeFrame) {
+        case 'Month':
+            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            userData = [12000, 12500, 13000, 13500, 14000, 14500];
+            FarmersData = [18000, 18500, 19000, 19500, 20000, 20500];
+            ProductsData = [11000, 12000, 13000, 14000, 15000, 16000];
+            TotalData = [17000, 17500, 18000, 18500, 19000, 19500];
+            break;
+        case 'Quarter':
+            labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            userData = [12500, 13500, 14200, 15048];
+            FarmersData = [18500, 21000, 19500, 23400];
+            ProductsData = [12000, 15000, 17000, 20000];
+            TotalData = [18500, 21000, 19500, 23400];
+            break;
+        case 'Year':
+            labels = ['2022', '2023', '2024', '2025'];
+            userData = [10000, 12500, 14200, 15408];
+            FarmersData = [15000, 18500, 21000, 23400];
+            ProductsData = [9000, 11000, 15000, 20000];
+            TotalData = [12000, 15000, 18000, 22000];
+            break;
+        default: // Week
+            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+            userData = [12000, 12500, 13000, 13500];
+            FarmersData = [18000, 18500, 19000, 19500];
+            ProductsData = [10000, 12000, 14000, 16000];
+            TotalData = [16000, 17000, 18000, 19000];
+    }
+    
+    // Update chart data
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = userData;
+    chart.data.datasets[1].data = FarmersData;
+    chart.data.datasets[2].data = ProductsData;
+    chart.data.datasets[3].data = TotalData;
+    
+    // Update chart
+    chart.update();
   }
 
   const allTimeFilters4 = document.querySelectorAll('.time-filter');
@@ -268,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
           labels: ['Q1', 'Q2', 'Q3', 'Q4'],
           datasets: [{
               label: 'New Users',
-              data: [1250, 1350, 1420, 1548],
+              data: [12500, 13500, 14020, 15048],
               borderColor: '#3498db',
               backgroundColor: 'rgba(52, 152, 219, 0.1)',
               borderWidth: 3,
