@@ -740,12 +740,52 @@
     </footer>
 
     <style>
-        #map {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
+    /* Map container */
+    #map {
+        width: 100%;
+        height: 80vh;        /* 80% of viewport height */
+        min-height: 400px;   /* never smaller than 400px */
+        max-height: 1000px;  /* optional upper limit */
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Optional wrapper for map and input */
+    .map-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Search input styling */
+    #searchInput {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;           /* responsive width */
+        max-width: 500px;     /* prevent it from being too wide */
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        z-index: 5;           /* stay on top of map */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive adjustments for small screens */
+    @media screen and (max-width: 600px) {
+        #searchInput {
+            font-size: 14px;
+            padding: 8px 12px;
         }
-    </style>
+
+        #map {
+            height: 70vh;
+        }
+    }
+</style>
+
 <script>
   let map, userMarker, autocomplete, placesService;
 
