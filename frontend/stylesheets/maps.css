@@ -1,44 +1,51 @@
- /* Map container */
-    #map {
-        width: 100%;
-        height: 80vh;        /* 80% of viewport height */
-        min-height: 400px;   /* never smaller than 400px */
-        max-height: 1000px;  /* optional upper limit */
-        border-radius: 10px;
-        box-sizing: border-box;
-    }
+/* Map container */
+#map {
+    width: 100%;
+    height: 80vh;        /* 80% of viewport height */
+    min-height: 400px;   /* never smaller than 400px */
+    max-height: 1000px;  /* optional upper limit */
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;    /* space between input and map */
+}
 
-    /* Optional wrapper for map and input */
-    .map-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
+/* Optional wrapper for map and input */
+.map-wrapper {
+    width: 100%;
+    height: auto;        /* wrapper height follows content */
+}
 
-    /* Search input styling */
+/* Search input styling */
+#searchInput {
+    /* Removed absolute positioning */
+    width: 90%;           /* responsive width */
+    max-width: 500px;     /* prevent it from being too wide */
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: block;
+    margin: 0 auto;       /* center horizontally */
+}
+
+/* Optional: search button next to input */
+.farmers-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments for small screens */
+@media screen and (max-width: 600px) {
     #searchInput {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;           /* responsive width */
-        max-width: 500px;     /* prevent it from being too wide */
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        z-index: 5;           /* stay on top of map */
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-size: 14px;
+        padding: 8px 12px;
     }
 
-    /* Responsive adjustments for small screens */
-    @media screen and (max-width: 600px) {
-        #searchInput {
-            font-size: 14px;
-            padding: 8px 12px;
-        }
-
-        #map {
-            height: 70vh;
-        }
+    #map {
+        height: 70vh;
     }
+}
