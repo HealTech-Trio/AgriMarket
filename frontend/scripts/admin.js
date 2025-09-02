@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Data for each metric (normalized for comparison)
   const userGrowthData = [1250, 1350, 1420, 1548];
   const VerifiedFarmersData = [18500, 21000, 19500, 23400];
-  const ActiveProductsData = [35, 25, 20, 12]; // Using % values
-  const TotalTransactionsData = [35, 28, 22, 10]; // Using % values
+  const ActiveProductsData = [635, 425, 720, 812]; // Using % values
+  const TotalTransactionsData = [435, 628, 422, 910]; // Using % values
 
   // Create the chart with initial data (Quarterly view)
   const chart = new Chart(ctx, {
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
       data: {
           labels: ['North America', 'Europe', 'Asia', 'South America', 'Africa'],
           datasets: [{
-              data: [35, 28, 22, 10, 5],
+              data: [35, 28, 22, 10, 15],
               backgroundColor: [
                   'rgba(52, 152, 219, 0.7)',
                   'rgba(46, 204, 113, 0.7)',
