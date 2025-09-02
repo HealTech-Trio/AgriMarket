@@ -1135,62 +1135,58 @@
                     
                     <div class="reports-grid">
                         <div class="chart-card">
-                            <div class="card-header">
-                                <h3>User Growth</h3>
-                                <div class="time-filter">
-                                    <button class="active">Month</button>
-                                    <button>Quarter</button>
-                                    <button>Year</button>
+                            <div class="chart-header">
+                                <div class="chart-title">User Growth</div>
+                                <div class="time-filters">
+                                    <div class="time-filter">Month</div>
+                                    <div class="time-filter active">Quarter</div>
+                                    <div class="time-filter">Year</div>
                                 </div>
                             </div>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-chart-line"></i>
-                                <p>User growth chart will appear here</p>
+                            <div class="chart-area">
+                                <canvas id="userGrowthChart"></canvas>
                             </div>
                         </div>
                         
                         <div class="chart-card">
-                            <div class="card-header">
-                                <h3>Transaction Volume</h3>
-                                <div class="time-filter">
-                                    <button class="active">Month</button>
-                                    <button>Quarter</button>
-                                    <button>Year</button>
+                            <div class="chart-header">
+                                <div class="chart-title">Top Categories</div>
+                                <div class="time-filters">
+                                    <div class="time-filter">Month</div>
+                                    <div class="time-filter active">Quarter</div>
+                                    <div class="time-filter">Year</div>
                                 </div>
                             </div>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-chart-bar"></i>
-                                <p>Transaction volume chart will appear here</p>
+                            <div class="chart-area">
+                                <canvas id="categoriesChart"></canvas>
                             </div>
                         </div>
                         
                         <div class="chart-card">
-                            <div class="card-header">
-                                <h3>Top Categories</h3>
-                                <div class="time-filter">
-                                    <button class="active">Month</button>
-                                    <button>Quarter</button>
-                                    <button>Year</button>
+                            <div class="chart-header">
+                                <div class="chart-title">Transaction Volume</div>
+                                <div class="time-filters">
+                                    <div class="time-filter">Month</div>
+                                    <div class="time-filter active">Quarter</div>
+                                    <div class="time-filter">Year</div>
                                 </div>
                             </div>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-chart-pie"></i>
-                                <p>Category distribution chart will appear here</p>
+                            <div class="chart-area">
+                                <canvas id="transactionChart"></canvas>
                             </div>
                         </div>
                         
                         <div class="chart-card">
-                            <div class="card-header">
-                                <h3>Regional Distribution</h3>
-                                <div class="time-filter">
-                                    <button class="active">Month</button>
-                                    <button>Quarter</button>
-                                    <button>Year</button>
+                            <div class="chart-header">
+                                <div class="chart-title">Regional Distribution</div>
+                                <div class="time-filters">
+                                    <div class="time-filter">Month</div>
+                                    <div class="time-filter active">Quarter</div>
+                                    <div class="time-filter">Year</div>
                                 </div>
                             </div>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-map-marked-alt"></i>
-                                <p>Regional distribution chart will appear here</p>
+                            <div class="chart-area">
+                                <canvas id="regionalChart"></canvas>
                             </div>
                         </div>
                     </div>
