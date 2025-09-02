@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Dashboard Container -->
@@ -196,17 +198,41 @@
                     
                     <div class="content-row">
                         <div class="chart-card">
-                            <div class="card-header">
-                                <h3>Platform Activity</h3>
-                                <div class="time-filter">
-                                    <button class="active">Week</button>
-                                    <button>Month</button>
-                                    <button>Year</button>
+                            <div class="dashboard-header">
+                                <div class="time-filters">
+                                    <div class="time-filter">Day</div>
+                                    <div class="time-filter">Week</div>
+                                    <div class="time-filter active">Month</div>
+                                    <div class="time-filter">Quarter</div>
+                                    <div class="time-filter">Year</div>
                                 </div>
                             </div>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-chart-line"></i>
-                                <p>Activity chart will appear here</p>
+                            
+                            <div class="main-chart-container">
+                                <div class="chart-title">
+                                    <i class="fas fa-chart-column"></i> Business Performance Overview
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="unifiedColumnChart"></canvas>
+                                </div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #3498db;"></div>
+                                        <span>User Growth</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #2ecc71;"></div>
+                                        <span>Verified Farmers</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #9b59b6;"></div>
+                                        <span>Active Products</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background-color: #e74c3c;"></div>
+                                        <span>Total Transactions</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
