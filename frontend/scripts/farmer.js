@@ -382,9 +382,8 @@ document.querySelector('.btn.btn-primary').addEventListener('click', function (e
       }
   }
 
-  // ❌ Show errors
   if (errors.length > 0) {
-      alert("Please fix the following:\n\n" + errors.join("\n"));
+      // alert("Please fix the following:\n\n" + errors.join("\n"));
       return;
   }
 
@@ -432,9 +431,9 @@ document.querySelector('.btn.btn-primary').addEventListener('click', function (e
   .then(data => {
       console.log(data);
       if (data.success) {
-          alert("Product added!");
+          // alert("Product added!");
       } else {
-          alert("Upload failed.");
+          // alert("Upload failed.");
       }
   })
   .catch(err => {
@@ -711,35 +710,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Demo functions for different features
     function showCropAnalysis() {
-        alert("Crop Analysis: Your tomatoes show 92% health with minor nutrient deficiencies detected. Apples are at 88% health with some signs of pest activity. Corn is at 95% health with optimal growth conditions.");
+        // alert("Crop Analysis: Your tomatoes show 92% health with minor nutrient deficiencies detected. Apples are at 88% health with some signs of pest activity. Corn is at 95% health with optimal growth conditions.");
     }
     
     function showWeatherInsights() {
-        alert("Weather Insights: 7-day forecast shows optimal growing conditions with moderate rainfall expected. Temperature range: 18-28°C. Humidity: 65-80%. Good conditions for most crops.");
+        // alert("Weather Insights: 7-day forecast shows optimal growing conditions with moderate rainfall expected. Temperature range: 18-28°C. Humidity: 65-80%. Good conditions for most crops.");
     }
     
     function showMarketTrends() {
-        alert("Market Trends: Tomato prices are rising (+15% this week). Apple demand is steady. Corn prices are stable but expected to increase next month. Best time to sell tomatoes is within the next 10 days.");
+        // alert("Market Trends: Tomato prices are rising (+15% this week). Apple demand is steady. Corn prices are stable but expected to increase next month. Best time to sell tomatoes is within the next 10 days.");
     }
     
     function showYieldPrediction() {
-        alert("Yield Prediction: Based on current growth patterns and weather forecasts, your expected yields are: Tomatoes - 850kg, Apples - 620kg, Corn - 450kg. This is 12% above your historical average.");
+        // alert("Yield Prediction: Based on current growth patterns and weather forecasts, your expected yields are: Tomatoes - 850kg, Apples - 620kg, Corn - 450kg. This is 12% above your historical average.");
     }
     
     function showResourceOptimizer() {
-        alert("Resource Optimization: You can reduce water usage by 15% by adjusting irrigation schedules. Fertilizer efficiency can be improved by 20% with targeted application. Energy costs can be reduced by 10% with solar panel installation.");
+        // alert("Resource Optimization: You can reduce water usage by 15% by adjusting irrigation schedules. Fertilizer efficiency can be improved by 20% with targeted application. Energy costs can be reduced by 10% with solar panel installation.");
     }
     
     function analyzeCropPhotos() {
-        alert("Crop Photo Analysis: Please upload images of your crops. Our AI will analyze them for disease detection, growth stage assessment, and health evaluation.");
+        // alert("Crop Photo Analysis: Please upload images of your crops. Our AI will analyze them for disease detection, growth stage assessment, and health evaluation.");
     }
     
     function showWeatherForecast() {
-        alert("7-Day Weather Forecast: \nMon: Sunny, 25°C \nTue: Partly cloudy, 26°C \nWed: Cloudy, 24°C \nThu: Light rain, 22°C \nFri: Showers, 20°C \nSat: Partly cloudy, 23°C \nSun: Sunny, 25°C");
+        // alert("7-Day Weather Forecast: \nMon: Sunny, 25°C \nTue: Partly cloudy, 26°C \nWed: Cloudy, 24°C \nThu: Light rain, 22°C \nFri: Showers, 20°C \nSat: Partly cloudy, 23°C \nSun: Sunny, 25°C");
     }
     
     function checkMarketPrices() {
-        alert("Current Market Prices: \nTomatoes: R45-55/kg \nApples: R60-70/kg \nCorn: R25-35/kg \nCarrots: R35-45/kg \nPotatoes: R20-30/kg \nOnions: R25-40/kg");
+        // alert("Current Market Prices: \nTomatoes: R45-55/kg \nApples: R60-70/kg \nCorn: R25-35/kg \nCarrots: R35-45/kg \nPotatoes: R20-30/kg \nOnions: R25-40/kg");
     }
     
     // Initialize the modal with demo data
@@ -1230,4 +1229,376 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize the modal with demo data
     populateTeamList();
+});
+
+// Crop Analysis Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Create crop modal element
+    const cropModal = document.createElement('div');
+    cropModal.className = 'crop-modal';
+    cropModal.innerHTML = `
+        <div class="crop-modal-backdrop"></div>
+        <div class="crop-modal-container">
+            <div class="crop-modal-header">
+                <div class="crop-header-content">
+                    <div class="crop-avatar">
+                        <div class="crop-pulse"></div>
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="crop-header-text">
+                        <h2>Crop Analysis</h2>
+                        <p>AI-powered crop health monitoring and diagnostics</p>
+                    </div>
+                </div>
+                <button class="crop-modal-close" id="closeCropModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="crop-modal-body">
+                <div class="crop-upload-section">
+                    <h3 class="upload-title">Upload Crop Images for Analysis</h3>
+                    <div class="upload-options">
+                        <div class="upload-btn" id="uploadImageBtn">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Upload Image</span>
+                            <input type="file" accept="image/*" style="display: none;" id="cropImageInput">
+                        </div>
+                        <div class="upload-btn" id="takePhotoBtn">
+                            <i class="fas fa-camera"></i>
+                            <span>Take Photo</span>
+                        </div>
+                    </div>
+                    <div class="upload-preview">
+                        <div class="preview-item empty" id="preview-1">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="preview-item empty" id="preview-2">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="preview-item empty" id="preview-3">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <button class="analyze-btn" id="analyzeBtn" disabled>
+                        <i class="fas fa-search"></i>
+                        Analyze Crop Health
+                    </button>
+                </div>
+                
+                <div class="crop-results-section">
+                    <h3 class="section-title"><i class="fas fa-heartbeat"></i> Health Assessment</h3>
+                    <div class="health-indicator">
+                        <div class="health-score">85%</div>
+                        <div class="health-label">Overall Crop Health</div>
+                        <div class="health-gauge">
+                            <div class="gauge-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="gauge-markers">
+                            <span class="gauge-marker">Critical</span>
+                            <span class="gauge-marker">Moderate</span>
+                            <span class="gauge-marker">Healthy</span>
+                        </div>
+                    </div>
+                    <div class="issues-list">
+                        <div class="issue-item">
+                            <div class="issue-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="issue-content">
+                                <div class="issue-name">Early Blight Detection</div>
+                                <p class="issue-desc">Fungal infection in early stages</p>
+                                <span class="issue-confidence">92% confidence</span>
+                            </div>
+                        </div>
+                        <div class="issue-item critical">
+                            <div class="issue-icon">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <div class="issue-content">
+                                <div class="issue-name">Nitrogen Deficiency</div>
+                                <p class="issue-desc">Yellowing leaves indicate nutrient lack</p>
+                                <span class="issue-confidence">87% confidence</span>
+                            </div>
+                        </div>
+                        <div class="issue-item resolved">
+                            <div class="issue-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="issue-content">
+                                <div class="issue-name">Aphid Resistance</div>
+                                <p class="issue-desc">No signs of pest infestation detected</p>
+                                <span class="issue-confidence">96% confidence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-analysis">
+                    <h3 class="section-title"><i class="fas fa-image"></i> Image Analysis</h3>
+                    <div class="analyzed-image">
+                        <img src="https://thumbs.dreamstime.com/b/view-fresh-tomatoes-different-shapes-tomato-shapes-173362970.jpg" alt="Crop analysis" id="analyzedImage">
+                        <div class="annotation warning" style="top: 30%; left: 40%; width: 80px; height: 60px;">
+                            <div class="annotation-label" style="top: -25px; left: 5px;">Early Blight</div>
+                        </div>
+                        <div class="annotation critical" style="top: 60%; left: 20%; width: 60px; height: 50px;">
+                            <div class="annotation-label" style="top: -25px; left: 5px;">Nutrient Def</div>
+                        </div>
+                    </div>
+                    <div class="analysis-notes">
+                        <p>AI has detected 2 areas of concern in your crop. The colored boxes highlight problematic areas with identified issues.</p>
+                    </div>
+                </div>
+                
+                <div class="recommendations-section">
+                    <h3 class="section-title"><i class="fas fa-clipboard-list"></i> Recommended Actions</h3>
+                    <div class="recommendation-item urgent">
+                        <div class="rec-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="rec-content">
+                            <h4>Apply Organic Fungicide</h4>
+                            <p>Treat early blight with copper-based fungicide. Apply within 3 days to prevent spread.</p>
+                            <div class="rec-details">
+                                <div class="rec-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Apply within 3 days</span>
+                                </div>
+                                <div class="rec-detail">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Repeat in 14 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="rec-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="rec-content">
+                            <h4>Adjust Fertilization</h4>
+                            <p>Apply nitrogen-rich fertilizer to address deficiency. Use 500g per 10m² area.</p>
+                            <div class="rec-details">
+                                <div class="rec-detail">
+                                    <i class="fas fa-weight"></i>
+                                    <span>500g/10m²</span>
+                                </div>
+                                <div class="rec-detail">
+                                    <i class="fas fa-cloud-rain"></i>
+                                    <span>Apply before rainfall</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="rec-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <div class="rec-content">
+                            <h4>Prune Affected Leaves</h4>
+                            <p>Remove severely affected leaves to prevent disease spread and improve air circulation.</p>
+                            <div class="rec-details">
+                                <div class="rec-detail">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Dispose properly</span>
+                                </div>
+                                <div class="rec-detail">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Sterilize tools after</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+                <div class="crop-actions">
+                    <button class="crop-action-btn">
+                        <i class="fas fa-camera"></i>
+                        Analyze Another Crop
+                    </button>
+                    <button class="crop-action-btn">
+                        <i class="fas fa-history"></i>
+                        View Historical Data
+                    </button>
+                    <button class="crop-action-btn primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Find Recommended Products
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(cropModal);
+    
+    // Get elements
+    const cropModalBackdrop = cropModal.querySelector('.crop-modal-backdrop');
+    const closeCropModal = cropModal.querySelector('#closeCropModal');
+    const uploadImageBtn = cropModal.querySelector('#uploadImageBtn');
+    const takePhotoBtn = cropModal.querySelector('#takePhotoBtn');
+    const cropImageInput = cropModal.querySelector('#cropImageInput');
+    const analyzeBtn = cropModal.querySelector('#analyzeBtn');
+    const previewItems = cropModal.querySelectorAll('.preview-item');
+    const analyzedImage = cropModal.querySelector('#analyzedImage');
+    
+    // Open modal when crop analysis is clicked
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.crop-analysis')) {
+            e.preventDefault();
+            openCropModal();
+        }
+    });
+    
+    // Close modal when close button is clicked
+    if (closeCropModal) {
+        closeCropModal.addEventListener('click', closeCropModalFunc);
+    }
+    
+    // Close modal when clicking outside
+    if (cropModalBackdrop) {
+        cropModalBackdrop.addEventListener('click', function(e) {
+            if (e.target === cropModalBackdrop) {
+                closeCropModalFunc();
+            }
+        });
+    }
+    
+    // Upload image button click
+    if (uploadImageBtn) {
+        uploadImageBtn.addEventListener('click', function() {
+            cropImageInput.click();
+        });
+    }
+    
+    // Image input change
+    if (cropImageInput) {
+        cropImageInput.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    // Find first empty preview item
+                    const emptyPreview = Array.from(previewItems).find(item => item.classList.contains('empty'));
+                    if (emptyPreview) {
+                        emptyPreview.innerHTML = '';
+                        emptyPreview.classList.remove('empty');
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        emptyPreview.appendChild(img);
+                        
+                        // Enable analyze button if at least one image is uploaded
+                        if (Array.from(previewItems).some(item => !item.classList.contains('empty'))) {
+                            analyzeBtn.disabled = false;
+                        }
+                    }
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    }
+    
+    // Take photo button click (simulated for demo)
+    if (takePhotoBtn) {
+        takePhotoBtn.addEventListener('click', function() {
+            // In a real app, this would access the device camera
+            // alert("Camera functionality would be implemented here. For this demo, please use the upload option.");
+        });
+    }
+    
+    // Analyze button click
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', function() {
+            // Simulate analysis process
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            analyzeBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Show analysis results
+                showAnalysisResults();
+                
+                // Reset button
+                analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analyze Crop Health';
+                analyzeBtn.disabled = false;
+            }, 2000);
+        });
+    }
+    
+    // Preview items click to remove
+    previewItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (!this.classList.contains('empty')) {
+                this.innerHTML = '<i class="fas fa-plus"></i>';
+                this.classList.add('empty');
+                
+                // Disable analyze button if no images are uploaded
+                if (Array.from(previewItems).every(item => item.classList.contains('empty'))) {
+                    analyzeBtn.disabled = true;
+                }
+            }
+        });
+    });
+    
+    // Function to open the Crop Analysis modal
+    function openCropModal() {
+        cropModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Reset the modal state
+        resetCropModal();
+    }
+    
+    // Function to close the Crop Analysis modal
+    function closeCropModalFunc() {
+        cropModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Function to reset the modal state
+    function resetCropModal() {
+        // Clear preview items
+        previewItems.forEach(item => {
+            item.innerHTML = '<i class="fas fa-plus"></i>';
+            item.classList.add('empty');
+        });
+        
+        // Disable analyze button
+        analyzeBtn.disabled = true;
+        
+        // Reset results to default state (hidden until analysis is done)
+        // In a real app, you might want to hide results initially
+    }
+    
+    // Function to show analysis results
+    function showAnalysisResults() {
+        // In a real app, this would process the actual analysis results
+        // For demo purposes, we're using predefined data
+        
+        // Update health score
+        const healthScore = cropModal.querySelector('.health-score');
+        healthScore.textContent = '85%';
+        
+        // Update gauge fill
+        const gaugeFill = cropModal.querySelector('.gauge-fill');
+        gaugeFill.style.width = '85%';
+        
+        // Update image with annotations (already in HTML)
+        analyzedImage.src = "https://thumbs.dreamstime.com/b/view-fresh-tomatoes-different-shapes-tomato-shapes-173362970.jpg";
+        
+        // Show impact analysis
+        const impactCards = cropModal.querySelectorAll('.impact-card');
+        impactCards[0].querySelector('.impact-value').textContent = '-25%';
+        impactCards[1].querySelector('.impact-value').textContent = 'R 200';
+        impactCards[2].querySelector('.impact-value').textContent = '+R 1,200';
+        
+        // Animate results appearance
+        const resultsSections = cropModal.querySelectorAll('.crop-results-section, .image-analysis, .recommendations-section, .impact-section');
+        resultsSections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    }
 });
