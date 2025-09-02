@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
       data: {
           labels: ['North America', 'Europe', 'Asia', 'South America', 'Africa'],
           datasets: [{
-              data: [35, 28, 22, 10, 5],
+              data: [35, 28, 22, 10, 15],
               backgroundColor: [
                   'rgba(52, 152, 219, 0.7)',
                   'rgba(46, 204, 113, 0.7)',
