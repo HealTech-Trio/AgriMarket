@@ -17,9 +17,9 @@ CORS(app)
 
 from flask import send_from_directory
 
-@app.route('/')
-def serve_index():
-    return send_from_directory('.', 'dashboard.php')
+# @app.route('/')
+# def serve_index():
+#     return send_from_directory('.', 'dashboard.php')
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
@@ -36,7 +36,7 @@ model = genai.GenerativeModel(
 
 chat_sessions = {}
 
-@app.route('/api/safety-chat', methods=['POST'])
+@app.route('/api/chatbot', methods=['POST'])
 def chatbot_response():
     try:
         user_input = request.form.get("message", "").strip()

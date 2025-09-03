@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('image', imageFile);
         }
 
-        const response = await fetch('http://127.0.0.1:5000/api/safety-chat', {
+        const response = await fetch('http://127.0.0.1:5000/api/chatbot', {
             method: 'POST',
             body: formData
         });
