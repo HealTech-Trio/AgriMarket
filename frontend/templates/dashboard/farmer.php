@@ -1344,11 +1344,8 @@
                 </button>
             </div>
             
-            <div class="chat-messages" id="chatMessages">
-                <div class="message ai-message">
-                    <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
+            <div id="chat-container" class="chat-messages">
+                <div class="chat-message ai-message">
                     <div class="message-content">
                         <p>Hello Divin! I'm your AgriAssistant AI. I can help you with crop management, weather insights, market trends, and any farming questions you have. How can I assist you today?</p>
                         <span class="message-time">Just now</span>
@@ -1356,21 +1353,51 @@
                 </div>
             </div>
             
-            <!-- <div class="chat-suggestions">
-                <div class="suggestion-chips">
-                    <button class="suggestion-chip">What's the best time to plant tomatoes?</button>
-                    <button class="suggestion-chip">Check my crop health</button>
-                    <button class="suggestion-chip">Market prices for apples</button>
-                    <button class="suggestion-chip">Weather forecast for next week</button>
-                </div>
-            </div> -->
-            
             <div class="chat-input-container">
-                <div class="chat-input">
-                    <input type="text" placeholder="Type your farming question..." id="chatInput">
-                    <button class="send-button" id="sendMessage">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
+                <!-- Recording Indicator (will be moved here dynamically) -->
+                <div class="recording-indicator" id="recording-indicator" style="display: none;">
+                    <div class="recording-animation">
+                        <div class="recording-dot"></div>
+                        <span>Recording...</span>
+                    </div>
+                    <span class="recording-time" id="recording-time">0:00</span>
+                </div>
+                
+                <div class="input-wrapper">
+                    <!-- Image Preview Area -->
+                    <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                        <div class="image-preview">
+                            <img id="previewImage" alt="Preview" />
+                            <button class="remove-image-btn" id="removeImageBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="input-row">
+                        <textarea 
+                            id="chat-input" 
+                            placeholder="Type your message..."
+                            rows="1"
+                            maxlength="1000"></textarea>
+                        
+                        <div class="input-actions">
+                            <input 
+                                type="file" 
+                                id="image-input" 
+                                accept="image/*" 
+                                style="display: none;">
+                            <button id="image-btn" class="image-btn" title="Upload Image">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <button id="voice-btn" class="voice-btn" title="Voice Recording">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button id="send-btn" class="send-btn" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
