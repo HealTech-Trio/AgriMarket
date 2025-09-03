@@ -1405,6 +1405,8 @@
 
     <script src="../../scripts/farmer.js"></script>
     <script src="../../scripts/chatbot.js"></script>
+    <script src="../../scripts/market-trend.js"></script>
+    <script src="../../scripts/yield-predictions.js"></script>
 
 </body>
 </html>
