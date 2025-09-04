@@ -938,6 +938,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function removeOverlays() {
         const overlays = yieldModal.querySelectorAll('.analysis-loading-overlay, .analysis-error-overlay');
-        overlays.forEach(overlay => overlay.remove());
+        overlays.forEach(overlay => {
+            if (overlay.parentElement) {
+                overlay.remove();
+            }
+        });
     }
 });
