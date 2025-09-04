@@ -44,21 +44,21 @@
                 <ul class="user-links">                    
                     <!-- Currency Switcher -->
                     <li class="currency-switcher">
-                        <a href="#">
+                        <a href="#" data-currency="ZAR">
                             <i class="fas fa-globe"></i>
-                            <span>ZAR</span>
+                            <span id="selected-currency">ZAR</span>
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="#">
+                            <a href="#" data-currency="ZAR">
                                 ZAR
                                 <span class="dropdown-flag"><span class="fi fi-za"></span></span>
                             </a>
-                            <a href="#">
+                            <a href="#" data-currency="USD">
                                 USD
                                 <span class="dropdown-flag"><span class="fi fi-us"></span></span>
                             </a>
-                            <a href="#">
+                            <a href="#" data-currency="EUR">
                                 EUR
                                 <span class="dropdown-flag"><span class="fi fi-eu"></span></span>
                             </a>
