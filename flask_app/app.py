@@ -188,6 +188,173 @@ def chatbot_response():
             "status": "error"
         }), 500
 
+
+# CROP ANALYSIS
+
+@app.route('/api/crop-analysis', methods=['POST'])
+def crop_analysis():
+    try:
+        uploaded_files = request.files.getlist('images')
+        
+        if not uploaded_files or len(uploaded_files) == 0:
+            return jsonify({
+                "error": "No images provided",
+                "status": "error"
+            }), 400
+        
+        # Validate that we have 1-3 images
+        if len(uploaded_files) > 3:
+            return jsonify({
+                "error": "Maximum 3 images allowed",
+                "status": "error"
+            }), 400
+        
+        # Process images
+        processed_images = []
+        for i, image_file in enumerate(uploaded_files):
+            if image_file.filename == '':
+                continue
+                
+            try:
+                # Process image
+                image_data = process_image(image_file.stream)
+                if image_data:
+                    processed_images.append(image_data)
+                else:
+                    return jsonify({
+                        "error": f"Could not process image {i+1}",
+                        "status": "error"
+                    }), 400
+            except Exception as e:
+                print(f"Error processing image {i+1}: {str(e)}")
+                return jsonify({
+                    "error": f"Failed to process image {i+1}",
+                    "status": "error"
+                }), 400
+        
+        if not processed_images:
+            return jsonify({
+                "error": "No valid images to analyze",
+                "status": "error"
+            }), 400
+        
+        # Prepare content for Gemini
+        content_parts = []
+        
+        # Add system instruction for crop analysis
+        analysis_prompt = """
+        You are an expert agricultural AI specialist. Analyze the provided crop image(s) and return ONLY a valid JSON response with the following exact structure:
+
+        {
+            "health_score": 85,
+            "health_status": "Healthy|Moderate|Critical",
+            "issues": [
+                {
+                    "name": "Issue Name",
+                    "description": "Brief description of the issue",
+                    "confidence": 92,
+                    "severity": "low|medium|high",
+                    "type": "disease|pest|nutrient|environmental"
+                }
+            ],
+            "recommendations": [
+                {
+                    "title": "Action Title",
+                    "description": "Detailed recommendation description",
+                    "urgency": "low|medium|high",
+                    "timeframe": "Apply within X days",
+                    "details": ["Detail 1", "Detail 2"]
+                }
+            ],
+            "summary": "Brief overall assessment of the crop condition"
+        }
+
+        Analyze for diseases, pests, nutrient deficiencies, and general health. Provide confidence scores as percentages (0-100). Return ONLY valid JSON, no other text.
+        """
+        
+        content_parts.append(analysis_prompt)
+        
+        # Add all processed images
+        for image_data in processed_images:
+            content_parts.append(image_data)
+        
+        # Send to Gemini for analysis
+        response = model.generate_content(
+            contents=content_parts,  # Changed 'content' to 'contents'
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.1,
+                max_output_tokens=1000,
+            )
+        )
+        
+        # Get the response text
+        response_text = response.text.strip()
+        print(f"Gemini crop analysis response: {response_text}")
+        
+        # Try to parse JSON response
+        try:
+            # Clean the response text - remove any markdown formatting
+            if response_text.startswith('```json'):
+                response_text = response_text.replace('```json', '').replace('```', '').strip()
+            elif response_text.startswith('```'):
+                response_text = response_text.replace('```', '').strip()
+            
+            analysis_result = json.loads(response_text)
+            
+            # Validate required fields
+            required_fields = ['health_score', 'health_status', 'issues', 'recommendations', 'summary']
+            for field in required_fields:
+                if field not in analysis_result:
+                    raise ValueError(f"Missing required field: {field}")
+            
+            return jsonify({
+                "analysis": analysis_result,
+                "status": "success"
+            })
+            
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"JSON parsing error: {str(e)}")
+            print(f"Raw response: {response_text}")
+            
+            # Fallback response if JSON parsing fails
+            return jsonify({
+                "analysis": {
+                    "health_score": 0,
+                    "health_status": "Moderate",
+                    "issues": [
+                        {
+                            "name": "Analysis Error",
+                            "description": "Could not parse detailed analysis",
+                            "confidence": 0,
+                            "severity": "medium",
+                            "type": "system"
+                        }
+                    ],
+                    "recommendations": [
+                        {
+                            "title": "Manual Review Needed",
+                            "description": "Please consult with an agricultural expert for detailed analysis",
+                            "urgency": "medium",
+                            "timeframe": "As soon as possible",
+                            "details": ["Contact local agricultural extension office"]
+                        }
+                    ],
+                    "summary": "Analysis completed but detailed results unavailable. Raw AI response: " + response_text[:200]
+                },
+                "status": "partial_success"
+            })
+    
+    except Exception as e:
+        print(f"Error in crop_analysis: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        
+        return jsonify({
+            "error": str(e),
+            "status": "error"
+        }), 500
+
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""

@@ -1170,7 +1170,11 @@
                             <i class="fas fa-seedling"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Crop Analysis</h3>
+                            <h3>Crop Analysis
+                                <span class="premium-badge" title="Pro Version">
+                                    <i class="fas fa-crown"></i> Pro
+                                </span>
+                            </h3>
                             <p>AI-powered crop health monitoring and disease detection</p>
                             <div class="feature-status">
                                 <span class="status-dot active"></span>
@@ -1408,6 +1412,7 @@
     <script src="../../scripts/market-trend.js"></script>
     <script src="../../scripts/yield-predictions.js"></script>
     <script src="../../scripts/sales-analysis.js"></script>
+    <script src="../../scripts/crop-analysis.js"></script>
 
 </body>
 </html>
