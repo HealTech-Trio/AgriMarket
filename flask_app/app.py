@@ -36,18 +36,43 @@ model = genai.GenerativeModel(
 
 chat_sessions = {}
 
+def process_image(file_stream):
+    """Process uploaded image file and return image data for Gemini"""
+    try:
+        # Reset stream position to beginning
+        file_stream.seek(0)
+        image = Image.open(file_stream)
+        
+        # Convert to RGB if necessary
+        if image.mode != 'RGB':
+            image = image.convert('RGB')
+        
+        # Save as PNG bytes
+        image_bytes = io.BytesIO()
+        image.save(image_bytes, format="PNG")
+        image_bytes.seek(0)
+        
+        return {
+            "mime_type": "image/png",
+            "data": image_bytes.read()
+        }
+    except Exception as e:
+        print(f"Image processing error: {e}")
+        return None
+
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot_response():
     try:
         user_input = request.form.get("message", "").strip()
         conversation_id = request.form.get("conversation_id", "")
         audio_file = request.files.get("audio")
+        image_file = request.files.get("image")
         
-        # Validate input - either text message or audio file must be provided
-        if not user_input and not audio_file:
+        # Validate input - either text message, audio file, or image file must be provided
+        if not user_input and not audio_file and not image_file:
             return jsonify({
-                "error": "No message or audio provided", 
-                "response": "Please provide a message or audio recording."
+                "error": "No message, audio, or image provided", 
+                "response": "Please provide a message, audio recording, or image."
             }), 400
         
         # Create chat session
@@ -62,8 +87,35 @@ def chatbot_response():
         # Prepare content for the message
         content_parts = []
         
+        # Handle image file if provided
+        if image_file:
+            try:
+                filename = image_file.filename.lower()
+                if filename.endswith((".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp")):
+                    image_data = process_image(image_file.stream)
+                    if image_data:
+                        content_parts.append(image_data)
+                        if user_input:
+                            content_parts.append(f"User question about the image: {user_input}")
+                        else:
+                            content_parts.append("Please describe what you see in this image.")
+                    else:
+                        content_parts.append(f"I received an image file named '{image_file.filename}' but couldn't process it.")
+                else:
+                    content_parts.append(f"I received a file named '{image_file.filename}' but I can only process image files (PNG, JPG, JPEG, GIF, BMP, WEBP).")
+                    
+                print(f"Processing image file: {image_file.filename}")
+                
+            except Exception as image_error:
+                print(f"Error processing image: {str(image_error)}")
+                return jsonify({
+                    "error": "Failed to process image file",
+                    "response": "I'm sorry, I couldn't process your image. Please try again.",
+                    "status": "error"
+                }), 400
+        
         # Handle audio file if provided
-        if audio_file:
+        elif audio_file:
             try:
                 # Save audio file temporarily
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.webm') as temp_file:
@@ -101,8 +153,9 @@ def chatbot_response():
                     "response": "I'm sorry, I couldn't process your audio recording. Please try again.",
                     "status": "error"
                 }), 400
-        else:
-            # Text-only message
+        
+        # Add user message if provided and not already handled with image
+        if user_input and not image_file:
             content_parts.append(user_input)
         
         # Send message to Gemini

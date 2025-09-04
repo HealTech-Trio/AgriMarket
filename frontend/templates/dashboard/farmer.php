@@ -1407,6 +1407,7 @@
     <script src="../../scripts/chatbot.js"></script>
     <script src="../../scripts/market-trend.js"></script>
     <script src="../../scripts/yield-predictions.js"></script>
+    <script src="../../scripts/sales-analysis.js"></script>
 
 </body>
 </html>

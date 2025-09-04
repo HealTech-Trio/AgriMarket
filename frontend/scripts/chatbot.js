@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function handleSendMessage() {
         const message = chatInput.value.trim();
         const hasImage = selectedImage !== null;
+        const imageFileToSend = selectedImageFile; // Store reference before clearing
         
         if ((!message && !hasImage) || isGenerating) return;
         
@@ -147,9 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
             addTextMessage(message, 'user');
         }
         
-        // Clear input and image
+        // Clear input but keep image reference for backend
         chatInput.value = '';
-        removeSelectedImage();
         autoResizeTextarea();
         
         // Add AI loading message
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Send to backend (include image file if present)
-            const response = await sendToBackend(message, null, selectedImageFile);
+            const response = await sendToBackend(message, null, imageFileToSend);
             
             // Remove loading and start typing
             removeLoadingIndicator(aiMessageElement);
@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
             removeLoadingIndicator(aiMessageElement);
             updateAIMessage(aiMessageElement, 'Sorry, I encountered an error. Please try again.');
         } finally {
+            // Don't call removeSelectedImage() here since we already cleared it above
             if (!isTyping) {
                 stopGeneration();
             }
