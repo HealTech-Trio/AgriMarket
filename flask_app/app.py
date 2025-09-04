@@ -9,6 +9,9 @@ import os
 import json
 from dotenv import load_dotenv
 import tempfile
+from datetime import datetime, timedelta
+from scipy.stats import norm
+import math
 
 load_dotenv()
 
@@ -20,6 +23,34 @@ from flask import send_from_directory
 # @app.route('/')
 # def serve_index():
 #     return send_from_directory('.', 'dashboard.php')
+
+# Crop yield baselines (tons per hectare)
+CROP_YIELD_BASELINES = {
+    "maize": 3.5, "corn": 3.5, "wheat": 2.8, "rice": 4.2, "soybean": 2.5,
+    "tomato": 25.0, "potato": 17.0, "cassava": 10.0, "sorghum": 2.0,
+    "barley": 2.7, "millet": 1.5, "beans": 1.2, "pea": 1.8, "cotton": 1.5,
+    "sugarcane": 70.0, "coffee": 1.2, "tea": 2.0, "cocoa": 0.8
+}
+
+# Crop maturity days
+CROP_MATURITY_DAYS = {
+    "maize": 120, "corn": 120, "wheat": 150, "rice": 120, "soybean": 100,
+    "tomato": 90, "potato": 110, "cassava": 270, "sorghum": 110,
+    "barley": 140, "millet": 90, "beans": 85, "pea": 95, "cotton": 160,
+    "sugarcane": 365, "coffee": 270, "tea": 180, "cocoa": 180
+}
+
+# Soil type multipliers (adjust yield based on soil quality)
+SOIL_MULTIPLIERS = {
+    "loam": 1.0, "clay": 0.85, "sandy": 0.75, "silt": 0.95, 
+    "peat": 0.9, "chalky": 0.8, "clay_loam": 0.95, "sandy_loam": 0.9
+}
+
+# Irrigation type multipliers
+IRRIGATION_MULTIPLIERS = {
+    "drip": 1.1, "sprinkler": 1.0, "flood": 0.9, "none": 0.7,
+    "manual": 0.85, "pivot": 1.05, "subsurface": 1.15
+}
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
@@ -355,6 +386,239 @@ def crop_analysis():
         }), 500
 
 
+@app.route('/api/yield-prediction', methods=['POST'])
+def yield_prediction():
+    try:
+        # Get form data
+        crop_type = request.form.get('crop_type', '').strip().lower()
+        variety = request.form.get('variety', '').strip()
+        area = request.form.get('area', '').strip()
+        planting_date_str = request.form.get('planting_date', '').strip()
+        soil_type = request.form.get('soil_type', '').strip().lower()
+        irrigation_type = request.form.get('irrigation_type', '').strip().lower()
+        
+        # Validate required fields
+        if not all([crop_type, variety, area, planting_date_str, soil_type, irrigation_type]):
+            return jsonify({
+                "error": "All fields are required",
+                "status": "error"
+            }), 400
+        
+        try:
+            area_float = float(area)
+            if area_float <= 0:
+                raise ValueError("Area must be positive")
+        except ValueError:
+            return jsonify({
+                "error": "Invalid area value",
+                "status": "error"
+            }), 400
+        
+        # Calculate quantitative values using formulas
+        # 1. Get baseline yield for crop type
+        baseline_yield = CROP_YIELD_BASELINES.get(crop_type, 2.0)  # Default to 2.0 if crop not found
+        
+        # 2. Apply soil and irrigation multipliers
+        soil_multiplier = SOIL_MULTIPLIERS.get(soil_type, 0.8)
+        irrigation_multiplier = IRRIGATION_MULTIPLIERS.get(irrigation_type, 0.8)
+        
+        # 3. Calculate expected yield per hectare
+        expected_yield_per_hectare = baseline_yield * soil_multiplier * irrigation_multiplier
+        
+        # 4. Calculate total yield
+        total_yield = area_float * expected_yield_per_hectare
+        
+        # 5. Calculate harvest window
+        try:
+            planting_date = datetime.strptime(planting_date_str, '%Y-%m-%d')
+            maturity_days = CROP_MATURITY_DAYS.get(crop_type, 100)
+            harvest_start = planting_date + timedelta(days=maturity_days - 7)
+            harvest_end = planting_date + timedelta(days=maturity_days + 7)
+            harvest_window = f"{harvest_start.strftime('%b %d')}-{harvest_end.strftime('%b %d')}"
+        except:
+            harvest_window = "Unable to determine"
+        
+        # 6. Calculate confidence using normal distribution
+        try:
+            # Assume baseline yield has a standard deviation of 20%
+            baseline_std = baseline_yield * 0.2
+            confidence = int(norm.cdf(expected_yield_per_hectare, 
+                                    loc=baseline_yield, 
+                                    scale=baseline_std) * 100)
+            confidence = max(50, min(95, confidence))  # Keep between 50-95%
+        except:
+            confidence = 75  # Fallback value
+        
+        # 7. Calculate comparison percentage (how it compares to baseline)
+        comparison_percentage = int(((expected_yield_per_hectare / baseline_yield) - 1) * 100)
+        comparison_status = "above" if comparison_percentage >= 0 else "below"
+        
+        # 8. Calculate individual scores using weighted factors
+        weather_score = 75 + (comparison_percentage // 2)  # Simulate weather impact
+        soil_score = int(soil_multiplier * 100)
+        water_score = int(irrigation_multiplier * 100)
+        pest_score = 80  # Base pest score, will be modified by Gemini
+        
+        # Prepare content for Gemini - Only ask for qualitative insights
+        analysis_prompt = f"""
+        You are an expert agricultural yield prediction AI specialist. Based on the calculated quantitative values, provide ONLY qualitative insights and recommendations in a valid JSON response with the following exact structure:
+
+        {{
+            "weather_impact": "+8%",
+            "weather_rainfall": "Optimal",
+            "weather_temperature": "Ideal range",
+            "weather_recommendation": "Weather conditions are favorable for maximum yield potential.",
+            "soil_impact": "+5%",
+            "soil_ph": "6.8 (Ideal)",
+            "soil_organic_matter": "Good",
+            "soil_recommendation": "Soil conditions are excellent. Maintain current practices.",
+            "water_impact": "+2%",
+            "water_stress": "Low",
+            "water_efficiency": "Could improve",
+            "water_recommendation": "Consider optimizing irrigation schedule for better efficiency.",
+            "pest_impact": "-3%",
+            "pest_risk_level": "Medium",
+            "pest_early_blight": "Low risk",
+            "pest_primary_threat": "Aphids - Moderate risk",
+            "pest_recommendation": "Monitor closely. Consider preventive measures in 2 weeks.",
+            "recommendations": [
+                {{
+                    "title": "Optimize Irrigation",
+                    "description": "Adjust drip irrigation to 30 minutes twice daily instead of 45 minutes once daily. This improves water absorption and reduces runoff.",
+                    "timeframe": "Implement within 7 days",
+                    "potential_gain": "Potential yield gain: +5%",
+                    "urgency": "medium",
+                    "icon": "fas fa-tint"
+                }},
+                {{
+                    "title": "Pest Prevention",
+                    "description": "Apply neem oil solution as preventive measure against aphids. Focus on lower leaf surfaces where pests typically gather.",
+                    "timeframe": "Apply within 5 days",
+                    "potential_gain": "Prevents 3-5% yield loss",
+                    "urgency": "high",
+                    "icon": "fas fa-spray-can"
+                }}
+            ],
+            "summary": "Based on current conditions, your {crop_type} crop shows excellent potential with favorable weather and soil conditions."
+        }}
+
+        IMPORTANT: DO NOT generate any numerical values for total_yield, yield_per_hectare, harvest_window, confidence, comparison_percentage, or any scores. These have already been calculated mathematically.
+
+        Crop Information:
+        - Crop Type: {crop_type}
+        - Variety: {variety}  
+        - Cultivation Area: {area} hectares
+        - Planting Date: {planting_date_str}
+        - Soil Type: {soil_type}
+        - Irrigation Type: {irrigation_type}
+
+        Calculated Values:
+        - Expected Yield: {total_yield:.2f} tons total, {expected_yield_per_hectare:.2f} tons/hectare
+        - Harvest Window: {harvest_window}
+        - Confidence: {confidence}%
+        - Comparison: {comparison_percentage}% {comparison_status} baseline
+
+        Provide only qualitative insights, explanations, and recommendations based on these calculated values. Return ONLY valid JSON, no other text.
+        """
+        
+        # Send to Gemini for qualitative analysis
+        response = model.generate_content(
+            contents=[analysis_prompt],
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.2,
+                max_output_tokens=1500,
+            )
+        )
+        
+        # Get the response text
+        response_text = response.text.strip()
+        print(f"Gemini qualitative response: {response_text}")
+        
+        # Try to parse JSON response
+        try:
+            # Clean the response text - remove any markdown formatting
+            if response_text.startswith('```json'):
+                response_text = response_text.replace('```json', '').replace('```', '').strip()
+            elif response_text.startswith('```'):
+                response_text = response_text.replace('```', '').strip()
+            
+            qualitative_result = json.loads(response_text)
+            
+            # Combine mathematical calculations with Gemini's qualitative insights
+            prediction_result = {
+                "total_yield": round(total_yield, 2),
+                "yield_per_hectare": round(expected_yield_per_hectare, 2),
+                "harvest_window": harvest_window,
+                "confidence": confidence,
+                "comparison_percentage": abs(comparison_percentage),  # Absolute value
+                "comparison_status": comparison_status,
+                "weather_score": weather_score,
+                "soil_score": soil_score,
+                "water_score": water_score,
+                "pest_score": pest_score,
+            }
+            
+            # Add all qualitative fields from Gemini
+            prediction_result.update(qualitative_result)
+            
+            return jsonify({
+                "prediction": prediction_result,
+                "status": "success"
+            })
+            
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"JSON parsing error: {str(e)}")
+            print(f"Raw response: {response_text}")
+            
+            # Fallback with calculated values only
+            prediction_result = {
+                "total_yield": round(total_yield, 2),
+                "yield_per_hectare": round(expected_yield_per_hectare, 2),
+                "harvest_window": harvest_window,
+                "confidence": confidence,
+                "comparison_percentage": abs(comparison_percentage),
+                "comparison_status": comparison_status,
+                "weather_score": weather_score,
+                "weather_impact": "0%",
+                "weather_recommendation": "Weather analysis unavailable",
+                "soil_score": soil_score,
+                "soil_impact": "0%", 
+                "soil_recommendation": "Soil analysis unavailable",
+                "water_score": water_score,
+                "water_impact": "0%",
+                "water_recommendation": "Water analysis unavailable",
+                "pest_score": pest_score,
+                "pest_impact": "0%",
+                "pest_recommendation": "Pest analysis unavailable",
+                "recommendations": [
+                    {
+                        "title": "Analysis Partially Completed",
+                        "description": "Quantitative calculations completed but qualitative analysis failed",
+                        "timeframe": "N/A",
+                        "potential_gain": "Please try again or consult an expert",
+                        "urgency": "low",
+                        "icon": "fas fa-exclamation-triangle"
+                    }
+                ],
+                "summary": f"Yield prediction calculated but detailed analysis unavailable. Expected yield: {total_yield:.2f} tons."
+            }
+            
+            return jsonify({
+                "prediction": prediction_result,
+                "status": "partial_success"
+            })
+    
+    except Exception as e:
+        print(f"Error in yield_prediction: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        
+        return jsonify({
+            "error": str(e),
+            "status": "error"
+        }), 500
+
+        
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
