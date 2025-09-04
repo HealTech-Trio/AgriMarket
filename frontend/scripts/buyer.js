@@ -1,25 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     async function GetProducts(){
-        let product_grid = document.querySelector(".product-grid.compact-view")
+        let product_grid = document.querySelector(".product-grid.compact-view");
 
-        const response = await fetch("http://localhost/AgriMarket/backend/products/get_products_buyer.php")
-        .then(response => response.json())
-        .then(data => {
+        try {
+            const response = await fetch("http://localhost/AgriMarket/backend/products/get_products_buyer.php");
+            const data = await response.json();
 
             data.forEach(product => {
-                console.log(product);
                 let product_card = document.createElement('div');
                 product_card.setAttribute("class", "product-card");
 
-                let discount_style = "";
-                if(product.discount > 0){
-                    discount_style = "block";
-                }
-                else{
-                    discount_style = "none";
-                }
-                let discounted_price = product.price - (product.price * product.discount / 100)
+                let discount_style = (product.discount > 0) ? "block" : "none";
+                let discounted_price = product.price - (product.price * product.discount / 100);
 
                 product_card.innerHTML = (`
                     <div class="product-card">
@@ -58,12 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 `);
 
                 product_grid.appendChild(product_card);
-                
             });
-        })
-        .catch(error => {
+        } catch (error) {
             console.error("Fetch error:", error);
-        });
+        }
     }
 
     // Track the current base currency
@@ -71,91 +62,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle dropdown selection
     document.querySelectorAll(".dropdown-menu a").forEach(item => {
-    item.addEventListener("click", async function(e) {
-        e.preventDefault();
+        item.addEventListener("click", async function(e) {
+            e.preventDefault();
 
-        // Update active state
-        document.querySelectorAll(".dropdown-menu a").forEach(link => link.classList.remove("active"));
-        this.classList.add("active");
+            document.querySelectorAll(".dropdown-menu a").forEach(link => link.classList.remove("active"));
+            this.classList.add("active");
 
-        const toCurrency = this.dataset.currency;
-        document.getElementById("selected-currency").innerText = toCurrency;
+            const toCurrency = this.dataset.currency;
+            document.getElementById("selected-currency").innerText = toCurrency;
 
-        const productCards = document.querySelectorAll('.product-card');
+            const productCards = document.querySelectorAll('.product-card');
+            const fromCurrency = currentCurrency;
 
-        // Use the same base for the whole batch
-        const fromCurrency = currentCurrency;
+            for (let card of productCards) {
+                const currentPriceEl = card.querySelector('.price');
+                const originalPriceEl = card.querySelector('.original-price');
 
-        for (let card of productCards) {
-        const currentPriceEl = card.querySelector('.price');
-        const originalPriceEl = card.querySelector('.original-price');
+                // --- Current Price ---
+                if (currentPriceEl) {
+                    let text = currentPriceEl.innerText; 
+                    let [pricePart, weightPart] = text.split(" / "); 
+                    let amount = pricePart.replace(/[^0-9.]/g, ''); 
 
-        // --- Current Price ---
-        if (currentPriceEl) {
-            // Extract numeric value
-            let text = currentPriceEl.innerText; // e.g. "R 65 / 10kg"
-            let [pricePart, weightPart] = text.split(" / "); 
+                    // show loader
+                    currentPriceEl.innerHTML = `<span class="price-loader"></span>`;
 
-            let amount = pricePart.replace(/[^0-9.]/g, ''); // "65"
-            let converted = await convertCurrency(amount, fromCurrency, toCurrency);
+                    let converted = await convertCurrency(amount, fromCurrency, toCurrency);
 
-            // Apply currency symbol + keep weight part
-            if (toCurrency === "USD") {
-            currentPriceEl.innerText = "$ " + converted.toFixed(2) + " / " + weightPart;
-            } else if (toCurrency === "EUR") {
-            currentPriceEl.innerText = "€ " + converted.toFixed(2) + " / " + weightPart;
-            } else {
-            currentPriceEl.innerText = "R " + converted.toFixed(2) + " / " + weightPart;
+                    if (toCurrency === "USD") {
+                        currentPriceEl.innerText = "$ " + converted.toFixed(2) + " / " + weightPart;
+                    } else if (toCurrency === "EUR") {
+                        currentPriceEl.innerText = "€ " + converted.toFixed(2) + " / " + weightPart;
+                    } else {
+                        currentPriceEl.innerText = "R " + Math.round(converted) + " / " + weightPart;
+                    }
+                }
+
+                // --- Original Price ---
+                if (originalPriceEl && originalPriceEl.style.display !== "none") {
+                    let amount = originalPriceEl.innerText.replace(/[^0-9.]/g, ''); 
+
+                    // show loader
+                    originalPriceEl.innerHTML = `<span class="price-loader"></span>`;
+
+                    let converted = await convertCurrency(amount, fromCurrency, toCurrency);
+
+                    if (toCurrency === "USD") {
+                        originalPriceEl.innerText = "$ " + converted.toFixed(2);
+                    } else if (toCurrency === "EUR") {
+                        originalPriceEl.innerText = "€ " + converted.toFixed(2);
+                    } else {
+                        originalPriceEl.innerText = "R " + converted.toFixed(2);
+                    }
+                }
             }
-        }
 
-        // --- Original Price (if visible) ---
-        if (originalPriceEl && originalPriceEl.style.display !== "none") {
-            let amount = originalPriceEl.innerText.replace(/[^0-9.]/g, ''); 
-            let converted = await convertCurrency(amount, fromCurrency, toCurrency);
-
-            if (toCurrency === "USD") {
-            originalPriceEl.innerText = "$ " + converted.toFixed(2);
-            } else if (toCurrency === "EUR") {
-            originalPriceEl.innerText = "€ " + converted.toFixed(2);
-            } else {
-            originalPriceEl.innerText = "R " + converted.toFixed(2);
-            }
-        }
-        }
-
-        // ✅ update after all elements are converted
-        currentCurrency = toCurrency;
-    });
+            currentCurrency = toCurrency;
+        });
     });
 
     // Conversion function
     async function convertCurrency(amount, fromCurrency, toCurrency) {
-    const amt = parseFloat(amount);
+        const amt = parseFloat(amount);
+        if (!amt) return 0;
 
-    if (!amt) {
-        alert("Please enter an amount.");
-        return 0;
+        if (fromCurrency === toCurrency) {
+            return amt;
+        }
+
+        const response = await fetch(
+            `https://api.frankfurter.app/latest?amount=${amt}&from=${fromCurrency}&to=${toCurrency}`
+        );
+        const data = await response.json();
+        return data.rates[toCurrency];
     }
 
-    // If same currency, no API call needed
-    if (fromCurrency === toCurrency) {
-        console.log(`${toCurrency} ${amt} (no conversion needed)`);
-        return amt;
-    }
-
-    // Fetch exchange rate
-    const response = await fetch(
-        `https://api.frankfurter.app/latest?amount=${amt}&from=${fromCurrency}&to=${toCurrency}`
-    );
-    const data = await response.json();
-
-    const rate = data.rates[toCurrency];
-
-    console.log(`Converted ${amt} ${fromCurrency} → ${rate} ${toCurrency}`);
-
-    return rate;
-    }
-
-
+    // Load products initially
+    GetProducts();
 });
