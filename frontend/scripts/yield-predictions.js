@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="input-group">
                         <label for="yield-variety">Variety</label>
                         <select id="yield-variety">
-                            <!-- Varieties will be populated dynamically based on crop selection -->
                             <option value="cherry">Cherry Tomatoes</option>
                             <option value="beefsteak" selected>Beefsteak Tomatoes</option>
                             <option value="roma">Roma Tomatoes</option>
@@ -99,199 +98,251 @@ document.addEventListener('DOMContentLoaded', function() {
                     </button>
                 </div>
                 
-                <!-- Results section -->
                 <div class="yield-overview" style="display: none;">
-                    <div class="yield-cards">
-                        <div class="yield-card">
-                            <div class="yield-icon">
-                                <i class="fas fa-weight-hanging"></i>
-                            </div>
-                            <div class="yield-content">
-                                <h3>Total Yield</h3>
-                                <div class="yield-value">0 tons</div>
-                                <div class="yield-comparison comparison-neutral">
-                                    <i class="fas fa-equals"></i>
-                                    <span>No comparison data</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="yield-card">
-                            <div class="yield-icon">
-                                <i class="fas fa-chart-area"></i>
-                            </div>
-                            <div class="yield-content">
-                                <h3>Yield per Hectare</h3>
-                                <div class="yield-value">0 t/ha</div>
-                                <div class="yield-comparison comparison-neutral">
-                                    <i class="fas fa-equals"></i>
-                                    <span>No comparison data</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="yield-card">
-                            <div class="yield-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="yield-content">
-                                <h3>Harvest Window</h3>
-                                <div class="yield-value">Not determined</div>
-                                <div class="yield-comparison comparison-neutral">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span>Based on planting date</span>
-                                </div>
-                            </div>
+                    <div class="overview-header">
+                        <h3 class="overview-title"><i class="fas fa-seedling"></i> Yield Prediction Results</h3>
+                        <div class="confidence-badge">
+                            <i class="fas fa-chart-line"></i>
+                            <span>89% Prediction Confidence</span>
                         </div>
                     </div>
-                    
-                    <div class="confidence-badge">
-                        <span>0% Prediction Confidence</span>
+                    <div class="overview-cards">
+                        <div class="yield-card primary">
+                            <div class="yield-icon">
+                                <i class="fas fa-weight"></i>
+                            </div>
+                            <div class="yield-value">8.7 tons</div>
+                            <div class="yield-label">Predicted Total Yield</div>
+                            <div class="yield-comparison comparison-positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>12% above average</span>
+                            </div>
+                        </div>
+                        <div class="yield-card">
+                            <div class="yield-icon">
+                                <i class="fas fa-ruler"></i>
+                            </div>
+                            <div class="yield-value">3.48 t/ha</div>
+                            <div class="yield-label">Yield per Hectare</div>
+                            <div class="yield-comparison comparison-positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>8% above average</span>
+                            </div>
+                        </div>
+                        <div class="yield-card">
+                            <div class="yield-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="yield-value">Nov 12-18</div>
+                            <div class="yield-label">Optimal Harvest Window</div>
+                            <div class="yield-comparison comparison-positive">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ideal conditions</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="yield-chart-section" style="display: none;">
-                    <h3>Yield Factors Analysis</h3>
-                    <div class="factor-analysis">
+                    <h3 class="section-title"><i class="fas fa-chart-bar"></i> Yield Forecast</h3>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Yield prediction chart will appear here</p>
+                            <small>Visualizing historical data and future predictions</small>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color legend-predicted"></div>
+                            <span>Predicted Yield</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color legend-historical"></div>
+                            <span>Historical Average</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color legend-optimal"></div>
+                            <span>Optimal Potential</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="factor-analysis" style="display: none;">
+                    <h3 class="section-title"><i class="fas fa-sliders-h"></i> Yield Factors Analysis</h3>
+                    <div class="factor-cards">
                         <div class="factor-card">
                             <div class="factor-header">
                                 <div class="factor-icon">
                                     <i class="fas fa-cloud-sun"></i>
                                 </div>
-                                <h4>Weather Conditions</h4>
-                                <div class="factor-impact impact-neutral">0%</div>
-                            </div>
-                            <div class="factor-progress">
-                                <div class="progress-bar">
-                                    <div class="bar-fill bar-optimal" style="width: 0%"></div>
-                                </div>
-                                <div class="factor-score">
-                                    <span>Score:</span>
-                                    <span>0/100</span>
-                                </div>
+                                <h4 class="factor-title">Weather Conditions</h4>
+                                <span class="factor-impact impact-positive">+8%</span>
                             </div>
                             <div class="factor-details">
-                                <div class="factor-detail">
-                                    <span>Rainfall:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-value">
+                                    <span>Forecast Score</span>
+                                    <span>82/100</span>
                                 </div>
-                                <div class="factor-detail">
-                                    <span>Temperature:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-bar">
+                                    <div class="bar-fill bar-optimal" style="width: 82%"></div>
                                 </div>
-                            </div>
-                            <div class="factor-recommendation">
-                                Weather analysis pending...
+                                <div class="factor-value">
+                                    <span>Rainfall</span>
+                                    <span>Optimal</span>
+                                </div>
+                                <div class="factor-value">
+                                    <span>Temperature</span>
+                                    <span>Ideal range</span>
+                                </div>
+                                <p class="factor-recommendation">Weather conditions are favorable for maximum yield potential.</p>
                             </div>
                         </div>
-                        
                         <div class="factor-card">
                             <div class="factor-header">
                                 <div class="factor-icon">
-                                    <i class="fas fa-mountain"></i>
+                                    <i class="fas fa-vial"></i>
                                 </div>
-                                <h4>Soil Quality</h4>
-                                <div class="factor-impact impact-neutral">0%</div>
-                            </div>
-                            <div class="factor-progress">
-                                <div class="progress-bar">
-                                    <div class="bar-fill bar-optimal" style="width: 0%"></div>
-                                </div>
-                                <div class="factor-score">
-                                    <span>Score:</span>
-                                    <span>0/100</span>
-                                </div>
+                                <h4 class="factor-title">Soil Health</h4>
+                                <span class="factor-impact impact-positive">+5%</span>
                             </div>
                             <div class="factor-details">
-                                <div class="factor-detail">
-                                    <span>pH Balance:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-value">
+                                    <span>Nutrient Level</span>
+                                    <span>78/100</span>
                                 </div>
-                                <div class="factor-detail">
-                                    <span>Organic Matter:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-bar">
+                                    <div class="bar-fill bar-optimal" style="width: 78%"></div>
                                 </div>
-                            </div>
-                            <div class="factor-recommendation">
-                                Soil analysis pending...
+                                <div class="factor-value">
+                                    <span>pH Balance</span>
+                                    <span>6.8 (Ideal)</span>
+                                </div>
+                                <div class="factor-value">
+                                    <span>Organic Matter</span>
+                                    <span>Good</span>
+                                </div>
+                                <p class="factor-recommendation">Soil conditions are excellent. Maintain current practices.</p>
                             </div>
                         </div>
-                        
                         <div class="factor-card">
                             <div class="factor-header">
                                 <div class="factor-icon">
                                     <i class="fas fa-tint"></i>
                                 </div>
-                                <h4>Water Management</h4>
-                                <div class="factor-impact impact-neutral">0%</div>
-                            </div>
-                            <div class="factor-progress">
-                                <div class="progress-bar">
-                                    <div class="bar-fill bar-optimal" style="width: 0%"></div>
-                                </div>
-                                <div class="factor-score">
-                                    <span>Score:</span>
-                                    <span>0/100</span>
-                                </div>
+                                <h4 class="factor-title">Water Availability</h4>
+                                <span class="factor-impact impact-neutral">+2%</span>
                             </div>
                             <div class="factor-details">
-                                <div class="factor-detail">
-                                    <span>Water Stress:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-value">
+                                    <span>Irrigation Score</span>
+                                    <span>65/100</span>
                                 </div>
-                                <div class="factor-detail">
-                                    <span>Efficiency:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-bar">
+                                    <div class="bar-fill bar-suboptimal" style="width: 65%"></div>
                                 </div>
-                            </div>
-                            <div class="factor-recommendation">
-                                Water analysis pending...
+                                <div class="factor-value">
+                                    <span>Water Stress</span>
+                                    <span>Low</span>
+                                </div>
+                                <div class="factor-value">
+                                    <span>Efficiency</span>
+                                    <span>Could improve</span>
+                                </div>
+                                <p class="factor-recommendation">Consider optimizing irrigation schedule for better efficiency.</p>
                             </div>
                         </div>
-                        
                         <div class="factor-card">
                             <div class="factor-header">
                                 <div class="factor-icon">
                                     <i class="fas fa-bug"></i>
                                 </div>
-                                <h4>Pest & Disease Risk</h4>
-                                <div class="factor-impact impact-neutral">0%</div>
-                            </div>
-                            <div class="factor-progress">
-                                <div class="progress-bar">
-                                    <div class="bar-fill bar-optimal" style="width: 0%"></div>
-                                </div>
-                                <div class="factor-score">
-                                    <span>Score:</span>
-                                    <span>0/100</span>
-                                </div>
+                                <h4 class="factor-title">Pest & Disease Risk</h4>
+                                <span class="factor-impact impact-negative">-3%</span>
                             </div>
                             <div class="factor-details">
-                                <div class="factor-detail">
-                                    <span>Risk Level:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-value">
+                                    <span>Risk Level</span>
+                                    <span>Medium</span>
                                 </div>
-                                <div class="factor-detail">
-                                    <span>Primary Threat:</span>
-                                    <span>Not analyzed</span>
+                                <div class="factor-bar">
+                                    <div class="bar-fill bar-suboptimal" style="width: 60%"></div>
                                 </div>
-                            </div>
-                            <div class="factor-recommendation">
-                                Pest analysis pending...
+                                <div class="factor-value">
+                                    <span>Early Blight</span>
+                                    <span>Low risk</span>
+                                </div>
+                                <div class="factor-value">
+                                    <span>Aphids</span>
+                                    <span>Moderate risk</span>
+                                </div>
+                                <p class="factor-recommendation">Monitor closely. Consider preventive measures in 2 weeks.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="recommendations-section" style="display: none;">
-                    <h3>Optimization Recommendations</h3>
+                    <h3 class="section-title"><i class="fas fa-clipboard-list"></i> Optimization Recommendations</h3>
                     <div class="recommendation-cards">
-                        <p class="no-recommendations">Submit a prediction to get personalized recommendations</p>
+                        <div class="recommendation-card">
+                            <div class="rec-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h4>Optimize Irrigation</h4>
+                                <p>Adjust drip irrigation to 30 minutes twice daily instead of 45 minutes once daily. This improves water absorption and reduces runoff.</p>
+                                <div class="rec-details">
+                                    <div class="rec-detail">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Implement within 7 days</span>
+                                    </div>
+                                    <div class="rec-detail">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>Potential yield gain: +5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card urgent">
+                            <div class="rec-icon">
+                                <i class="fas fa-spray-can"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h4>Pest Prevention</h4>
+                                <p>Apply neem oil solution as preventive measure against aphids. Focus on lower leaf surfaces where pests typically gather.</p>
+                                <div class="rec-details">
+                                    <div class="rec-detail">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Apply within 5 days</span>
+                                    </div>
+                                    <div class="rec-detail">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Prevents 3-5% yield loss</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                
+                <div class="yield-actions" style="display: none;">
+                    <button class="yield-action-btn">
+                        <i class="fas fa-download"></i>
+                        Export Full Report
+                    </button>
+                    <button class="yield-action-btn">
+                        <i class="fas fa-bell"></i>
+                        Set Harvest Reminder
+                    </button>
+                    <button class="yield-action-btn primary">
+                        <i class="fas fa-seedling"></i>
+                        Create Management Plan
+                    </button>
                 </div>
             </div>
         </div>
     `;
-
-    // Add the modal to the DOM FIRST
     document.body.appendChild(yieldModal);
 
     // Crop varieties data structure
@@ -609,7 +660,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showPredictionLoading() {
         if (!predictYieldBtn) return;
         
-        predictYieldBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Predicting...';
+        predictYieldBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
         predictYieldBtn.disabled = true;
 
         hideResultSections();
@@ -730,8 +781,8 @@ document.addEventListener('DOMContentLoaded', function() {
             comparison.className = 'yield-comparison comparison-negative';
             comparison.innerHTML = `<i class="fas fa-arrow-down"></i><span>${percentage}% below average</span>`;
         } else {
-            comparison.className = 'yield-comparison comparison-neutral';
-            comparison.innerHTML = `<i class="fas fa-equals"></i><span>No comparison data</span>`;
+            comparison.className = 'yield-comparison comparison-positive';
+            comparison.innerHTML = `<i class="fas fa-check-circle"></i><span>Ideal conditions</span>`;
         }
     }
 
@@ -810,9 +861,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update score
-        const scoreElements = card.querySelectorAll('.factor-value span:last-child');
-        if (scoreElements[0] && data.score) {
-            scoreElements[0].textContent = `${data.score}/100`;
+        const scoreElement = card.querySelector('.factor-value:first-child span:last-child');
+        if (scoreElement && data.score) {
+            scoreElement.textContent = `${data.score}/100`;
         }
 
         // Update progress bar
@@ -831,10 +882,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update values
-        if (data.values && scoreElements.length >= data.values.length + 1) {
+        const valueElements = card.querySelectorAll('.factor-value:not(:first-child) span:last-child');
+        if (data.values && valueElements.length >= data.values.length) {
             data.values.forEach((value, index) => {
-                if (scoreElements[index + 1] && value.value) {
-                    scoreElements[index + 1].textContent = value.value;
+                if (valueElements[index] && value.value) {
+                    valueElements[index].textContent = value.value;
                 }
             });
         }
@@ -889,14 +941,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showResultSections() {
-        const sections = yieldModal.querySelectorAll('.yield-overview, .yield-chart-section, .factor-analysis, .recommendations-section');
+        const sections = yieldModal.querySelectorAll('.yield-overview, .yield-chart-section, .factor-analysis, .recommendations-section, .yield-actions');
         sections.forEach((section, index) => {
             section.style.display = 'block';
             section.style.opacity = '0';
             section.style.transform = 'translateY(20px)';
-
+            section.style.transition = 'all 0.5s ease';
+            
             setTimeout(() => {
-                section.style.transition = 'all 0.5s ease';
                 section.style.opacity = '1';
                 section.style.transform = 'translateY(0)';
             }, index * 200);
@@ -904,7 +956,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function hideResultSections() {
-        const sections = yieldModal.querySelectorAll('.yield-overview, .yield-chart-section, .factor-analysis, .recommendations-section');
+        const sections = yieldModal.querySelectorAll('.yield-overview, .yield-chart-section, .factor-analysis, .recommendations-section, .yield-actions');
         sections.forEach(section => {
             section.style.display = 'none';
         });

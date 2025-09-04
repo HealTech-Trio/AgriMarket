@@ -437,7 +437,7 @@
                     
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-image">
+                            <div class="product-image1">
                             <img src="https://thumbs.dreamstime.com/b/view-fresh-tomatoes-different-shapes-tomato-shapes-173362970.jpg" alt="Organic Tomatoes">
                                 <div class="product-status in-stock">In Stock</div>
                             </div>
@@ -456,7 +456,7 @@
                         </div>
                         
                         <div class="product-card">
-                            <div class="product-image">
+                            <div class="product-image1">
                                 <img src="https://tse1.mm.bing.net/th/id/OIP.cc1fmrVHT-YDXEVia6rsUwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fresh Apples">
                                 <div class="product-status in-stock">In Stock</div>
                             </div>
@@ -475,7 +475,7 @@
                         </div>
                         
                         <div class="product-card">
-                            <div class="product-image">
+                            <div class="product-image1">
                                 <img src="https://tse4.mm.bing.net/th/id/OIP.jNvLzjm9bZSCJKKjiZL2AQAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Sweet Corn">
                                 <div class="product-status low-stock">Low Stock</div>
                             </div>
@@ -494,7 +494,7 @@
                         </div>
                         
                         <div class="product-card">
-                            <div class="product-image">
+                            <div class="product-image1">
                                 <img src="https://th.bing.com/th/id/R.2a211c11dab40396b01d0129693c27d6?rik=YQM%2fl2ZuC0I3ug&pid=ImgRaw&r=0" alt="Carrots">
                                 <div class="product-status out-of-stock">Out of Stock</div>
                             </div>
