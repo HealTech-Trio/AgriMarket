@@ -9,6 +9,14 @@ How might we design platforms or systems that connect rural farmers directly wit
 
 ---
 
+## 🎥 Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/2rqCau4cMDg/maxresdefault.jpg)](https://www.youtube.com/watch?v=2rqCau4cMDg)
+
+*Click the image above to watch the full-screen demo on YouTube.*
+
+---
+
 ## 📖 Background & Context
 
 In South Africa, many small-scale rural farmers depend on informal markets with unstable pricing and limited buyer access. As a result, they face low, inconsistent income and significant post-harvest losses due to unsold produce. 
