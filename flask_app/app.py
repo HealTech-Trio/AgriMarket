@@ -20,10 +20,6 @@ CORS(app)
 
 from flask import send_from_directory
 
-# @app.route('/')
-# def serve_index():
-#     return send_from_directory('.', 'dashboard.php')
-
 # Crop yield baselines (tons per hectare)
 CROP_YIELD_BASELINES = {
     "maize": 3.5, "corn": 3.5, "wheat": 2.8, "rice": 4.2, "soybean": 2.5,
