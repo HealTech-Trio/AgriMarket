@@ -11,7 +11,7 @@ How might we design platforms or systems that connect rural farmers directly wit
 
 ## 🎥 Demo Video
 
-*Click the image above to watch the full-screen demo on YouTube.*
+*Click the image below to watch the full-screen demo on YouTube.*
 
 <a href="https://www.youtube.com/watch?v=2rqCau4cMDg" target="_blank">
   <img src="image.png" alt="Watch the demo" style="max-width:100%; height:auto;">
