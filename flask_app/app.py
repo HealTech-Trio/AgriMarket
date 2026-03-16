@@ -57,7 +57,7 @@ except FileNotFoundError:
     system_instruction = "No instructions found"
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash-exp",
+    model_name="gemini-2.5-flash",
     system_instruction=system_instruction
 )
 
