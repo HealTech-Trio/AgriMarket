@@ -1,15 +1,15 @@
-# 💡 AgriMarket Challenge
+# AgriMarket Challenge
 **Digital Markets for Local Farmers**
 
 ---
 
-## 🌾 Challenge Statement
+## Challenge Statement
 
 How might we design platforms or systems that connect rural farmers directly with urban consumers, restaurants, or retailers — enabling fair pricing, reduced waste, and transparent food sourcing?
 
 ---
 
-## 🎥 Demo Video
+## Demo Video
 
 *Click the image below to watch the full-screen demo on YouTube.*
 
@@ -29,7 +29,7 @@ Digital platforms can bridge this divide by allowing direct connections between 
 
 ---
 
-## ✅ Our Solution
+## Our Solution
 
 We are building a **simple, mobile-friendly web platform** that connects local farmers directly with urban consumers or restaurants. It will serve as an online marketplace that enables farmers to list their produce, set fair prices, and receive orders directly from buyers.
 
@@ -43,9 +43,9 @@ We are building a **simple, mobile-friendly web platform** that connects local f
 
 ---
 
-## 🧱 Core Features
+## Core Features
 
-### 1. 👨‍🌾 Farmer Dashboard
+### 1. Farmer Dashboard
 - Register/Login system
 - Upload product info (name, image, price, stock)
 - View and manage orders
@@ -59,25 +59,25 @@ We are building a **simple, mobile-friendly web platform** that connects local f
 - View order history
 - Chat with farmers
 
-### 3. 🤖 AI Assistant (Gemini API)
+### 3. AI Assistant (Gemini API)
 - Suggest fair prices based on market conditions
 - Recommend which crops to plant based on season
 - Guide users on platform usage
 
-### 4. ⚙️ Admin Panel
+### 4. Admin Panel
 *Optional for system support but important for user validation*
 - Approve farmer registrations
 - View total orders and product statistics
 - Manage flagged users or listings
 
-### 5. 💳 Payment System
+### 5. Payment System
 - Simple proof-of-payment (upload receipt)
 - Mobile wallet options (e.g., M-Pesa, PayFast)
 - Track order payment status
 
 ---
 
-## ⚙️ Technology Stack
+## Technology Stack
 
 | **Area** | **Technology Stack** |
 |----------|---------------------|
@@ -88,7 +88,7 @@ We are building a **simple, mobile-friendly web platform** that connects local f
 
 ---
 
-## 🎯 Impact Goals
+## Impact Goals
 
 - **Enable fair income** for farmers by eliminating middlemen
 - **Reduce post-harvest food waste** through faster sales
@@ -97,15 +97,12 @@ We are building a **simple, mobile-friendly web platform** that connects local f
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 *Add installation and setup instructions here*
 
-## 📝 License
+## License
 
-*Add license information here*
+*MIT*
 
-## 🤝 Contributing
-
-*Add contribution guidelines here*
  
